@@ -197,8 +197,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125853386}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.77, y: 1.22, z: -4.48}
+  m_LocalRotation: {x: 0.12579355, y: 0.8734334, z: -0.31241038, w: 0.35169566}
+  m_LocalPosition: {x: -1.6730102, y: 1.4830103, z: 1.8180337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   m_Layer: 0
   m_Name: Graph
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 2446438148933220011, guid: 88606a822bbfed24aab9a200ffcc3e7a,
     type: 3}
-  resolution: 35
-  function: 1
+  resolution: 80
+  function: 4
 --- !u!4 &1260904944
 Transform:
   m_ObjectHideFlags: 0

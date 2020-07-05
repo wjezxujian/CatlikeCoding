@@ -19,7 +19,7 @@ public class Graph3 : MonoBehaviour
     Transform[] points;
 
     static GraphFunction[] functions = {
-        SineFunction, Sine2DFunction, MultiSineFunction
+        SineFunction, Sine2DFunction, MultiSineFunction, MultiSine2DFunction, RippleFunction
     };
 
     private void Awake()
@@ -82,7 +82,7 @@ public class Graph3 : MonoBehaviour
             Transform point = points[i];
             Vector3 position = point.localPosition;
             //position.y = position.x * position.x * position.x;
-            Debug.Log("Time.time: " + Time.time);
+            //Debug.Log("Time.time: " + Time.time);
             //position.y = Mathf.Sin(Mathf.PI * (position.x + Time.time));
             //position.y = SineFunction(position.x, t);
             //position.y = MultiSineFunction(position.x, t);
@@ -105,7 +105,7 @@ public class Graph3 : MonoBehaviour
     static private float MultiSineFunction(float x, float z, float t)
     {
         float y = Mathf.Sin(Mathf.PI * (x + t));
-        y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) / 2f;
+        y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) * 0.5f;
         y *= 2f / 3f;
         return y;
     }
@@ -116,9 +116,28 @@ public class Graph3 : MonoBehaviour
 
         float y = Mathf.Sin(Mathf.PI * (x + t));
         y += Mathf.Sin(Mathf.PI * (z + t));
-        y /= 2;
+        y *= 0.5f;
         return y;
     }
 
+    const float ratio = 1f / 5.5f;
+    static  private float MultiSine2DFunction(float x, float z, float t)
+    {
+        float y = 4f * Mathf.Sin(Mathf.PI * (x + z + t * 0.5f));
+        y += Mathf.Sin(Mathf.PI * (x + t));
+        y += Mathf.Sin(2f * Mathf.PI * (z + 2f * t))  * 0.5f;
+        y *= ratio;
+
+        return y;
+
+    }
+
+    static float RippleFunction(float x, float z, float t)
+    {
+        float d = Mathf.Sqrt(x * x + z * z);
+        float y = Mathf.Sin(4f * Mathf.PI * d - t);
+        y /= 1f + 10f * d;
+        return y;
+    }
 
 }
