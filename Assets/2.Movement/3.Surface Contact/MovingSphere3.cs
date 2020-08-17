@@ -35,6 +35,7 @@ public class MovingSphere3 : MonoBehaviour
     int jumpPhase;
     float minGroundDotProduct;
     Vector3 contactNormal;
+    int setpsSinceLastGrounded = 0;
 
     bool OnGround => groundContactCount > 0;
 
@@ -224,9 +225,11 @@ public class MovingSphere3 : MonoBehaviour
     private void UpdateState()
     {
         velocity = body.velocity;
+        setpsSinceLastGrounded += 1;
 
-        if (OnGround)
+        if (OnGround || SnapToGround())
         {
+            setpsSinceLastGrounded = 0;
             jumpPhase = 0;
             if (groundContactCount > 1)
             {
@@ -246,4 +249,32 @@ public class MovingSphere3 : MonoBehaviour
         contactNormal = Vector3.zero;
     }
 
+    private bool SnapToGround()
+    {
+        if(setpsSinceLastGrounded > 1)
+        {
+            return false;
+        }
+
+        if(!Physics.Raycast(body.position, Vector3.down, out RaycastHit hit))
+        {
+            return false;
+        }
+
+        if(hit.normal.y < minGroundDotProduct)
+        {
+            return false;
+        }
+
+        groundContactCount = 1;
+        contactNormal = hit.normal;
+        float speed = velocity.magnitude;
+        float dot = Vector3.Dot(velocity, hit.normal);
+        if(dot > 0)
+        {
+            velocity = (velocity - hit.normal * dot).normalized * speed;
+        }
+        
+        return true;
+    }
 }
