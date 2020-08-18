@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5102440488129654228}
   - component: {fileID: 627438236070667598}
   - component: {fileID: 3161519777335663659}
+  - component: {fileID: -8607380940198834792}
   - component: {fileID: 4971639523140571071}
-  - component: {fileID: -8214071065343408085}
   - component: {fileID: 748927001489882770}
   m_Layer: 0
   m_Name: Sphere
@@ -98,6 +98,33 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8607380940198834792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960446105877024775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76fd899944645741a078c80f18d4ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
+  maxAcceleration: 100
+  maxAirAcceleration: 1
+  jumpHeight: 2
+  maxAirJumps: 3
+  maxGroundAngle: 46
+  maxStairsAngle: 50
+  maxSnapSpeed: 100
+  probeDistance: 1
+  probeMask:
+    serializedVersion: 2
+    m_Bits: 1075
+  stairsMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!96 &4971639523140571071
 TrailRenderer:
   serializedVersion: 2
@@ -160,9 +187,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -170,7 +197,7 @@ TrailRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -196,24 +223,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &-8214071065343408085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4960446105877024775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f76fd899944645741a078c80f18d4ea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 10
-  maxAcceleration: 10
-  maxAirAcceleration: 1
-  jumpHeight: 2
-  maxAirJumps: 0
-  maxGroundAngle: 40
 --- !u!54 &748927001489882770
 Rigidbody:
   m_ObjectHideFlags: 0

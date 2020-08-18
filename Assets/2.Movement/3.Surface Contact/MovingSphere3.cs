@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 
 public class MovingSphere3 : MonoBehaviour
 {
     [SerializeField, Range(0, 100f)]
     float maxSpeed = 10f;
-
-    Vector3 velocity, desiredVelocity;
 
     [SerializeField, Range(0, 100f)]
     float maxAcceleration = 10f, maxAirAcceleration = 1f;        //最大加速度
@@ -20,7 +19,16 @@ public class MovingSphere3 : MonoBehaviour
     int maxAirJumps = 0;
 
     [SerializeField, Range(0f, 90f)]
-    float maxGroundAngle = 25f;
+    float maxGroundAngle = 25f, maxStairsAngle = 50f;
+
+    [SerializeField, Range(0f, 100f)]
+    float maxSnapSpeed = 100f;
+
+    [SerializeField, Min(0f)]
+    float probeDistance = 1f;
+
+    [SerializeField]
+    LayerMask probeMask = -1, stairsMask = -1;
 
     //[SerializeField]
     //Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
@@ -29,19 +37,30 @@ public class MovingSphere3 : MonoBehaviour
     //float bounciness = 0.5f;
 
     Rigidbody body;
+
+    Vector3 velocity, desiredVelocity;
+
     bool desiredJump;
-    //bool onGround;
-    int groundContactCount;
+
     int jumpPhase;
-    float minGroundDotProduct;
-    Vector3 contactNormal;
-    int setpsSinceLastGrounded = 0;
+
+    float minGroundDotProduct, minStairsDotProduct;
+
+    Vector3 contactNormal, steepNoraml;
+
+    //bool onGround;
+    int groundContactCount, steepContactCount;
+
+    int stepsSinceLastGrounded, stepsSinceLastJump;
 
     bool OnGround => groundContactCount > 0;
+
+    bool OnSteep => steepContactCount > 0;
 
     private void OnValidate()
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+        minStairsDotProduct = Mathf.Cos(maxStairsAngle * Mathf.Deg2Rad);
     }
 
     private Vector3 ProjectOnContactPlane(Vector3 vector)
@@ -132,8 +151,9 @@ public class MovingSphere3 : MonoBehaviour
 
         //颜色
         GetComponent<Renderer>().material.SetColor("_Color", Color.white * (groundContactCount * 0.25f));
-        GetComponent<Renderer>().material.SetColor("_Color", OnGround ? Color.black : Color.white) ;
-    
+        //GetComponent<Renderer>().material.SetColor("_Color", OnGround ? Color.black : Color.white) ;
+        GetComponent<Renderer>().material.SetColor("_Color", OnSteep ? Color.red : OnGround ? Color.black : Color.white);
+
     }
 
 
@@ -168,25 +188,45 @@ public class MovingSphere3 : MonoBehaviour
     private void Jump()
     {
         //velocity.y += 5f;
+        Vector3 jumpDirection;
+        if (OnGround)
+        {
+            jumpDirection = contactNormal;
+        }
+        else if(OnSteep)
+        {
+            jumpDirection = steepNoraml;
+        }
+        else if(maxAirJumps > 0 && jumpPhase <= maxAirJumps)
+        {
+            if (jumpPhase == 0)
+            {
+                jumpPhase = 1;
+            }
+            jumpDirection = contactNormal;
+        }
+        else
+        {
+            return;
+        }
 
         //½gt² = h; gt = v; 故v = √2gh;
-        if (OnGround || jumpPhase < maxAirJumps)
-        {
-            jumpPhase += 1;
-            //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-            //velocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        stepsSinceLastJump = 0;
+        jumpPhase += 1;
+        //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        //velocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
 
-            float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-            float alignedSpeed = Vector3.Dot(velocity, contactNormal);
-            if (velocity.y > 0f)
-            {
-                //jumpSpeed = jumpSpeed - velocity.y;
-                //jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0);
-                jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0);
-            }
-            //velocity.y += jumpSpeed;
-            velocity += contactNormal * jumpSpeed;
+        float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        jumpDirection = (jumpDirection + Vector3.up).normalized;
+        float alignedSpeed = Vector3.Dot(velocity, jumpDirection);
+        if (velocity.y > 0f)
+        {
+            //jumpSpeed = jumpSpeed - velocity.y;
+            //jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0);
+            jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0);
         }
+        //velocity.y += jumpSpeed;
+        velocity += jumpDirection * jumpSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -208,16 +248,21 @@ public class MovingSphere3 : MonoBehaviour
 
     void EvaluateCollision(Collision collision)
     {
+        float minDot = GetMinDot(collision.gameObject.layer);
         for (int i = 0; i < collision.contactCount; ++i)
         {
             Vector3 normal = collision.GetContact(i).normal;
             //onGround |= normal.y >= 0.9f;
             //onGround |= normal.y >= minGroundDotProduct;
-            if (normal.y >= minGroundDotProduct)
+            if (normal.y >= minDot)
             {
                 //onGround = true;
                 groundContactCount += 1;
                 contactNormal += normal;
+            }else if(normal.y > -0.01f)
+            {
+                steepContactCount += 1;
+                steepNoraml += normal;
             }
         }
     }
@@ -225,12 +270,17 @@ public class MovingSphere3 : MonoBehaviour
     private void UpdateState()
     {
         velocity = body.velocity;
-        setpsSinceLastGrounded += 1;
+        stepsSinceLastGrounded += 1;
+        stepsSinceLastJump += 1;
 
-        if (OnGround || SnapToGround())
+        if (OnGround || SnapToGround() || CheckSteepContacts())
         {
-            setpsSinceLastGrounded = 0;
-            jumpPhase = 0;
+            stepsSinceLastGrounded = 0;
+            if(stepsSinceLastJump > 1)
+            {
+                jumpPhase = 0;
+            }
+            
             if (groundContactCount > 1)
             {
                 contactNormal.Normalize();
@@ -245,30 +295,36 @@ public class MovingSphere3 : MonoBehaviour
     private void ClearState()
     {
         //onGround = false;
-        groundContactCount = 0;
-        contactNormal = Vector3.zero;
+        groundContactCount = steepContactCount = 0;
+        contactNormal = steepNoraml = Vector3.zero;
     }
 
     private bool SnapToGround()
     {
-        if(setpsSinceLastGrounded > 1)
+        if(stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2)
         {
             return false;
         }
 
-        if(!Physics.Raycast(body.position, Vector3.down, out RaycastHit hit))
+        float speed = velocity.magnitude;
+        if (speed > maxSnapSpeed)
         {
             return false;
         }
 
-        if(hit.normal.y < minGroundDotProduct)
+        if (!Physics.Raycast(body.position, Vector3.down, out RaycastHit hit, probeDistance, probeMask))
+        {
+            return false;
+        }
+
+        if(hit.normal.y < GetMinDot(hit.collider.gameObject.layer))
         {
             return false;
         }
 
         groundContactCount = 1;
         contactNormal = hit.normal;
-        float speed = velocity.magnitude;
+        //float speed = velocity.magnitude;
         float dot = Vector3.Dot(velocity, hit.normal);
         if(dot > 0)
         {
@@ -277,4 +333,26 @@ public class MovingSphere3 : MonoBehaviour
         
         return true;
     }
+
+    private float GetMinDot(int layer)
+    {
+        return (stairsMask & (1 << layer)) == 0 ? minGroundDotProduct : minStairsDotProduct;
+    }
+
+    private bool CheckSteepContacts()
+    {
+        if(steepContactCount > 1)
+        {
+            steepNoraml.Normalize();
+            if(steepNoraml.y >= minGroundDotProduct)
+            {
+                groundContactCount = 1;
+                contactNormal = steepNoraml;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
