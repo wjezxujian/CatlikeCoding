@@ -8282,6 +8282,14 @@ MonoBehaviour:
   distance: 5
   focusRadius: 1
   focusCentering: 0.75
+  rotationSpeed: 90
+  minVerticalAngle: -30
+  maxVerticalAngle: 60
+  alignDelay: 5
+  alignSmoothRange: 45
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 563
 --- !u!43 &1180247632
 Mesh:
   m_ObjectHideFlags: 0
@@ -10559,6 +10567,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1592236091097162470, guid: 98a62b150771f2345aa3754e100b7564,
+        type: 3}
+      propertyPath: playerInputSpace
+      value: 
+      objectReference: {fileID: 963194228}
     - target: {fileID: 2886209830697181171, guid: 98a62b150771f2345aa3754e100b7564,
         type: 3}
       propertyPath: m_Interpolate
@@ -10623,6 +10636,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403445946370470246, guid: 98a62b150771f2345aa3754e100b7564,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a62b150771f2345aa3754e100b7564, type: 3}
