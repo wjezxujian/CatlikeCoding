@@ -27,6 +27,9 @@ public class OrbitCamera6 : MonoBehaviour
     [SerializeField, Range(0f, 90f)]
     float alignSmoothRange = 45f;
 
+    [SerializeField, Min(0f)]
+    float upAlignmentSpeed = 360f;  //摄像机对齐速度
+
     [SerializeField]
     LayerMask obstructionMask = -1;
 
@@ -77,8 +80,11 @@ public class OrbitCamera6 : MonoBehaviour
     {
         ////5.1.4 自定义重力下对齐轨道摄像机
         //gravityAlignment = Quaternion.FromToRotation(gravityAlignment * Vector3.up, -Physics.gravity.normalized) * gravityAlignment;
-        //5.2.2 应用自定义重力
-        gravityAlignment = Quaternion.FromToRotation(gravityAlignment * Vector3.up, CustomGravity.GetUpAxis(focusPoint)) * gravityAlignment;
+        ////5.2.2 应用自定义重力
+        //gravityAlignment = Quaternion.FromToRotation(gravityAlignment * Vector3.up, CustomGravity.GetUpAxis(focusPoint)) * gravityAlignment;
+
+        //6.2.4 摄像机对齐速度
+        UpdateGravityAligment();
 
         ////2.2 控制轨道
         ////Vector3 focusPoint = focus.position;
@@ -137,6 +143,29 @@ public class OrbitCamera6 : MonoBehaviour
 
 
         transform.SetPositionAndRotation(lookPosition, lookRotation);
+    }
+
+    void UpdateGravityAligment()
+    {
+        Vector3 fromUp = gravityAlignment * Vector3.up;
+        Vector3 toUp = CustomGravity.GetUpAxis(focusPoint);
+
+        float dot = Mathf.Clamp(Vector3.Dot(fromUp, toUp), -1f, 1f);
+        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+        float maxAngle = upAlignmentSpeed * Time.deltaTime;
+
+        Quaternion newAlignment = Quaternion.FromToRotation(fromUp, toUp) * gravityAlignment;
+
+        if(angle <= maxAngle)
+        {
+            gravityAlignment = newAlignment;
+        }
+        else
+        {
+            gravityAlignment = Quaternion.SlerpUnclamped(gravityAlignment, newAlignment, maxAngle / angle);
+        }
+
+        gravityAlignment = newAlignment;
     }
 
     private void UpdateFocusPoint()
