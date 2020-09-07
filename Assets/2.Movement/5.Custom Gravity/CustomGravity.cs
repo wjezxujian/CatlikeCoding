@@ -35,8 +35,11 @@ public class CustomGravity : MonoBehaviour
     {
         //return -Physics.gravity.normalized;
         //return position.normalized;
-        Vector3 up = position.normalized;
-        return Physics.gravity.y < 0f ? up : -up;
+        //Vector3 up = position.normalized;
+        //return Physics.gravity.y < 0f ? up : -up;
+
+        var g = GetGravity(position);
+        return -g.normalized;
     }
 
     public static Vector3 GetGravity(Vector3 position, out Vector3 upAxis)

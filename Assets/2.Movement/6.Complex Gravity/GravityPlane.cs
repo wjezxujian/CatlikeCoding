@@ -10,8 +10,8 @@ public class GravityPlane : GravitySource
 
     public override Vector3 GetGravity(Vector3 position)
     {
-        //Vector3 up = transform.up;    //重力方向跟局部坐标系保持一直
-        Vector3 up = Vector3.up;        //重力方向跟世界坐标系保持一直
+        Vector3 up = transform.up;    //重力方向跟局部坐标系保持一直
+        //Vector3 up = Vector3.up;        //重力方向跟世界坐标系保持一直
         float distance = Vector3.Dot(up, position - transform.position);
         if(distance > range)
         {
@@ -42,17 +42,5 @@ public class GravityPlane : GravitySource
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireCube(Vector3.up, size);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics.Eventing.Reader;
+using UnityEngine;
 
 public class GravitySphere : GravitySource
 {
@@ -6,15 +7,21 @@ public class GravitySphere : GravitySource
     float gravity = 9.81f;
 
     [SerializeField]
+    float innerFalloffRadius = 1f, innerRadius = 5f;
+
+    [SerializeField]
     float outerRadius = 10f, outerFalloffRadius = 15f;
 
-    float outerFalloffFactor;
+    
+
+
+    float innerFalloffFactor, outerFalloffFactor;
 
     public override Vector3 GetGravity(Vector3 position)
     {
         Vector3 vector = transform.position - position;
         float distance = vector.magnitude;
-        if(distance > outerFalloffRadius)
+        if(distance > outerFalloffRadius || distance < innerFalloffRadius)
         {
             return Vector3.zero;
         }
@@ -23,14 +30,28 @@ public class GravitySphere : GravitySource
         {
             g *= 1f - (distance - outerRadius) * outerFalloffFactor;
         }
+        else if(distance < innerRadius)
+        {
+            g *= 1f - (innerRadius - distance) * innerFalloffFactor;
+        }
         return g * vector;
     }
 
     private void OnDrawGizmos()
     {
         Vector3 p = transform.position;
+        if (innerFalloffRadius > 0f && innerFalloffRadius < innerRadius)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(p, innerFalloffRadius);
+        }
         Gizmos.color = Color.yellow;
+        if(innerRadius > 0f && innerRadius < outerRadius)
+        {
+            Gizmos.DrawWireSphere(p, innerRadius);
+        }
         Gizmos.DrawWireSphere(p, outerRadius);
+       
         if(outerFalloffRadius > outerRadius)
         {
             Gizmos.color = Color.cyan;
@@ -45,19 +66,12 @@ public class GravitySphere : GravitySource
 
     private void OnValidate()
     {
+        innerFalloffRadius = Mathf.Max(innerFalloffRadius, 0f);
+        innerRadius = Mathf.Max(innerRadius, innerFalloffRadius);
+        outerRadius = Mathf.Max(outerRadius, innerRadius);
         outerFalloffRadius = Mathf.Max(outerFalloffRadius, outerRadius);
+
+        innerFalloffFactor = 1f / (innerRadius - innerFalloffRadius);
         outerFalloffFactor = 1f / (outerFalloffRadius - outerRadius);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

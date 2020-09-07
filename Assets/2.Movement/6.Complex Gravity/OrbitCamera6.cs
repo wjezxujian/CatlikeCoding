@@ -71,10 +71,10 @@ public class OrbitCamera6 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        LateUpdate();
-    }
+    //void Update()
+    //{
+    //    LateUpdate();
+    //}
 
     private void LateUpdate()
     {
@@ -149,7 +149,7 @@ public class OrbitCamera6 : MonoBehaviour
     {
         Vector3 fromUp = gravityAlignment * Vector3.up;
         Vector3 toUp = CustomGravity.GetUpAxis(focusPoint);
-
+         
         float dot = Mathf.Clamp(Vector3.Dot(fromUp, toUp), -1f, 1f);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         float maxAngle = upAlignmentSpeed * Time.deltaTime;
@@ -164,8 +164,6 @@ public class OrbitCamera6 : MonoBehaviour
         {
             gravityAlignment = Quaternion.SlerpUnclamped(gravityAlignment, newAlignment, maxAngle / angle);
         }
-
-        gravityAlignment = newAlignment;
     }
 
     private void UpdateFocusPoint()
@@ -221,7 +219,7 @@ public class OrbitCamera6 : MonoBehaviour
         }
 
         //Vector2 movement = new Vector2(focusPoint.x - previousFocusPoint.x, focusPoint.z - previousFocusPoint.z);
-        Vector3 alignedDelta = Quaternion.Inverse(gravityAlignment) * (focusPoint = previousFocusPoint);
+        Vector3 alignedDelta = Quaternion.Inverse(gravityAlignment) * (focusPoint - previousFocusPoint);
         Vector2 movement = new Vector2(alignedDelta.x, alignedDelta.z);
         float movementDelataSqr = movement.sqrMagnitude;
         if (movementDelataSqr < 0.000001f)
