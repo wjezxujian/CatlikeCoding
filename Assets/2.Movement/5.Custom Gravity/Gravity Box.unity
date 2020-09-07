@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3616,9 +3616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -9.81
-  boundaryDistance: {x: 10, y: 8, z: 10}
+  boundaryDistance: {x: 8, y: 8, z: 8}
   innerDistance: 3
   innerFalloffDistance: 6
+  outerDistance: 4
+  outerFalloffDistance: 6
 --- !u!4 &393108002
 Transform:
   m_ObjectHideFlags: 0
@@ -24684,6 +24686,11 @@ PrefabInstance:
       propertyPath: playerInputSpace
       value: 
       objectReference: {fileID: 1822895529}
+    - target: {fileID: 7539254537979881935, guid: d771dd4e65bc3f04d90657f56f0f5fbc,
+        type: 3}
+      propertyPath: maxGroundAngle
+      value: 48
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d771dd4e65bc3f04d90657f56f0f5fbc, type: 3}
 --- !u!4 &1812557790 stripped
