@@ -39,9 +39,9 @@ public class MovingSphere7 : MonoBehaviour
     //[SerializeField, Range(0f, 1f)]
     //float bounciness = 0.5f;
 
-    Rigidbody body;
+    Rigidbody body, connectedBody, previousConnectedBody;
 
-    Vector3 velocity, desiredVelocity;
+    Vector3 velocity, desiredVelocity, connectionVelocity;
 
     bool desiredJump;
 
@@ -62,6 +62,8 @@ public class MovingSphere7 : MonoBehaviour
 
     Vector3 upAxis, rightAxis, forwardAxis; //指定自定义重力的轴
 
+    Vector3 connectionWorldPosition, connectionLocalPosition;
+
     private void OnValidate()
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
@@ -78,7 +80,7 @@ public class MovingSphere7 : MonoBehaviour
         return (direction - noraml * Vector3.Dot(direction, noraml)).normalized;
     }
 
-    private void AgjustVelocity()
+    private void AdjustVelocity()
     {
         //Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
         //Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
@@ -86,8 +88,9 @@ public class MovingSphere7 : MonoBehaviour
         Vector3 xAxis = ProjectDirectionOnPlane(rightAxis, contactNormal);
         Vector3 zAxis = ProjectDirectionOnPlane(forwardAxis, contactNormal);
 
-        float currentX = Vector3.Dot(velocity, xAxis);
-        float currentZ = Vector3.Dot(velocity, zAxis);
+        Vector3 relativeVelocity = velocity - connectionVelocity;
+        float currentX = Vector3.Dot(relativeVelocity, xAxis);
+        float currentZ = Vector3.Dot(relativeVelocity, zAxis);
 
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
         float maxSpeedChange = acceleration * Time.deltaTime;
@@ -204,7 +207,7 @@ public class MovingSphere7 : MonoBehaviour
 
         //velocity = body.velocity;
         UpdateState();
-        AgjustVelocity();
+        AdjustVelocity();
 
         ////float maxSpeedChange = maxAcceleration * Time.deltaTime;
         //float acceleration = onGround ? maxAcceleration : maxAirAcceleration;
@@ -308,11 +311,17 @@ public class MovingSphere7 : MonoBehaviour
                 //onGround = true;
                 groundContactCount += 1;
                 contactNormal += normal;
+                connectedBody = collision.rigidbody;
             }
             else if (upDot > -0.01f)
             {
                 steepContactCount += 1;
                 steepNoraml += normal;
+
+                if(groundContactCount == 0)
+                {
+                    connectedBody = collision.rigidbody;
+                }
             }
         }
     }
@@ -341,13 +350,37 @@ public class MovingSphere7 : MonoBehaviour
             //contactNormal = Vector3.up;
             contactNormal = upAxis;
         }
+
+        if (connectedBody)
+        {
+            if(connectedBody.isKinematic || connectedBody.mass >= body.mass)
+            {
+                UpdateConnectionState();
+            }
+        }
+    }
+
+    void UpdateConnectionState()
+    {
+        if(connectedBody == previousConnectedBody)
+        {
+            //Vector3 connectionMovement = connectedBody.position - connectionWorldPosition;
+            Vector3 connectionMovement = connectedBody.transform.TransformPoint(connectionLocalPosition) - connectionWorldPosition;
+            connectionVelocity = connectionMovement / Time.deltaTime;
+        }
+
+        //connectionWorldPosition = connectedBody.position;
+        connectionWorldPosition = body.position;
+        connectionLocalPosition = connectedBody.transform.InverseTransformPoint(connectionWorldPosition);
     }
 
     private void ClearState()
     {
         //onGround = false;
         groundContactCount = steepContactCount = 0;
-        contactNormal = steepNoraml = Vector3.zero;
+        contactNormal = steepNoraml = connectionVelocity = Vector3.zero;
+        previousConnectedBody = connectedBody;
+        connectedBody = null;
     }
 
     private bool SnapToGround()
@@ -382,6 +415,9 @@ public class MovingSphere7 : MonoBehaviour
         {
             velocity = (velocity - hit.normal * dot).normalized * speed;
         }
+
+        //跟踪连接物体
+        connectedBody = hit.rigidbody;
 
         return true;
     }
