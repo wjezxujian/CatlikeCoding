@@ -52,13 +52,13 @@ public class MovingSphere8 : MonoBehaviour
     //Vector3 velocity, desiredVelocity, connectionVelocity;
     Vector3 velocity, connectionVelocity;
 
-    bool desiredJump;
+    bool desiredJump, desiresClimbing;
 
     int jumpPhase;
 
     float minGroundDotProduct, minStairsDotProduct, minClimbDotProduct;
 
-    Vector3 contactNormal, steepNoraml, climbNormal;
+    Vector3 contactNormal, steepNoraml, climbNormal, lastClimbNormal;
 
     //bool onGround;
     int groundContactCount, steepContactCount, climbContactCount;
@@ -114,7 +114,7 @@ public class MovingSphere8 : MonoBehaviour
         else
         {
             acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-            speed = maxSpeed;
+            speed = OnGround &&  desiresClimbing ? maxClimbSpeed : maxSpeed;
             xAxis = rightAxis;
             zAxis = forwardAxis;
         }
@@ -225,6 +225,7 @@ public class MovingSphere8 : MonoBehaviour
         //body.velocity = velocity;
 
         desiredJump |= Input.GetButtonDown("Jump");
+        desiresClimbing = Input.GetButton("Climb");
 
         //颜色
         //GetComponent<Renderer>().material.SetColor("_Color", Color.white * (groundContactCount * 0.25f));
@@ -269,6 +270,14 @@ public class MovingSphere8 : MonoBehaviour
         if (Climbing)
         {
             velocity -= contactNormal * (maxClimbAcceleration * 0.9f * Time.deltaTime);   
+        }
+        else if (OnGround && velocity.sqrMagnitude < 0.01f)
+        {
+            velocity += contactNormal * (Vector3.Dot(gravity, contactNormal) * Time.deltaTime);
+        }
+        else if (desiresClimbing && OnGround)
+        {
+            velocity += (gravity - contactNormal * (maxClimbAcceleration * 0.9f)) * Time.deltaTime;
         }
         else
         {
@@ -376,10 +385,11 @@ public class MovingSphere8 : MonoBehaviour
                     }
                 }
 
-                if(upDot >= minClimbDotProduct && (climbMask & (1 << layer)) != 0)
+                if(desiresClimbing && upDot >= minClimbDotProduct && (climbMask & (1 << layer)) != 0)
                 {
                     climbContactCount += 1;
                     climbNormal += normal;
+                    lastClimbNormal = normal;
                     connectedBody = collision.rigidbody;
                 }
             }
@@ -448,7 +458,17 @@ public class MovingSphere8 : MonoBehaviour
     {
         if (Climbing)
         {
-            groundContactCount = climbContactCount;
+            if(climbContactCount > 1)
+            {
+                climbNormal.Normalize();
+                float upDot = Vector3.Dot(upAxis, climbNormal);
+                if(upDot >= minGroundDotProduct)
+                {
+                    climbNormal = lastClimbNormal;
+                }
+            }
+
+            groundContactCount = 1;
             contactNormal = climbNormal;
             return true;
         }
