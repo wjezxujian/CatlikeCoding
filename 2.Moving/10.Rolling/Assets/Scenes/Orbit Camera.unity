@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -20519,6 +20519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxAirAcceleration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6315726874829106890, guid: 0379d4707a828415494f18f6eb7a15be,
+        type: 3}
+      propertyPath: ballAlignSpeed
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6315726874829106892, guid: 0379d4707a828415494f18f6eb7a15be,
         type: 3}
