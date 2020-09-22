@@ -57,6 +57,9 @@ public class MovingSphere : MonoBehaviour {
 		climbingMaterial = default,
 		swimmingMaterial = default;
 
+	[SerializeField]
+	float ballRadius = 0.5f;
+
 	Rigidbody body, connectedBody, previousConnectedBody;
 
 	Vector3 playerInput;
@@ -70,6 +73,9 @@ public class MovingSphere : MonoBehaviour {
 	bool desiredJump, desiresClimbing;
 
 	Vector3 contactNormal, steepNormal, climbNormal, lastClimbNormal;
+
+
+	Vector3 lastContactNormal;
 
 	int groundContactCount, steepContactCount, climbContactCount;
 
@@ -142,10 +148,19 @@ public class MovingSphere : MonoBehaviour {
 
 	void UpdateBall()
     {
-		Material ballMaterial = Climbing ? climbingMaterial : 
-											Swimming ? swimmingMaterial : normalMaterial;
-
+		Material ballMaterial = Climbing ? climbingMaterial : Swimming ? swimmingMaterial : normalMaterial;
 		meshRenderer.material = ballMaterial;
+
+		Vector3 movement = body.velocity * Time.deltaTime;
+		float distance = movement.magnitude;
+		if(distance < 0.001f)
+        {
+			return;
+        }
+
+		float angle = distance * (180f / Mathf.PI) / ballRadius;
+		Vector3 rotationAxis = Vector3.Cross(lastContactNormal, movement).normalized;
+		ball.localRotation = Quaternion.Euler(rotationAxis * angle) * ball.localRotation;
 
     }
 
@@ -190,6 +205,7 @@ public class MovingSphere : MonoBehaviour {
 	}
 
 	void ClearState () {
+		lastContactNormal = contactNormal;
 		groundContactCount = steepContactCount = climbContactCount = 0;
 		contactNormal = steepNormal = climbNormal = Vector3.zero;
 		connectionVelocity = Vector3.zero;
