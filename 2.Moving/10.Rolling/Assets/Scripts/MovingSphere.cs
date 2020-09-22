@@ -3,7 +3,7 @@
 public class MovingSphere : MonoBehaviour {
 
 	[SerializeField]
-	Transform playerInputSpace = default;
+	Transform playerInputSpace = default, ball = default;
 
 	[SerializeField, Range(0f, 100f)]
 	float maxSpeed = 10f, maxClimbSpeed = 4f, maxSwimSpeed = 5f;
@@ -106,14 +106,14 @@ public class MovingSphere : MonoBehaviour {
 	void Awake () {
 		body = GetComponent<Rigidbody>();
 		body.useGravity = false;
-		meshRenderer = GetComponent<MeshRenderer>();
+		meshRenderer = ball.GetComponent<MeshRenderer>();
 		OnValidate();
 	}
 
 	void Update () {
 		playerInput.x = Input.GetAxis("Horizontal");
-		playerInput.y = Input.GetAxis("Vertical");
-		playerInput.z = Swimming ? Input.GetAxis("UpDown") : 0f;
+		playerInput.z = Input.GetAxis("Vertical");
+		playerInput.y = Swimming ? Input.GetAxis("UpDown") : 0f;
 		playerInput = Vector3.ClampMagnitude(playerInput, 1f);
 
 		if (playerInputSpace) {
@@ -134,10 +134,20 @@ public class MovingSphere : MonoBehaviour {
 			desiresClimbing = Input.GetButton("Climb");
 		}
 
-		meshRenderer.material =
-			Climbing ? climbingMaterial :
-			Swimming ? swimmingMaterial : normalMaterial;
+		//meshRenderer.material =
+		//	Climbing ? climbingMaterial :
+		//	Swimming ? swimmingMaterial : normalMaterial;
+		UpdateBall();
 	}
+
+	void UpdateBall()
+    {
+		Material ballMaterial = Climbing ? climbingMaterial : 
+											Swimming ? swimmingMaterial : normalMaterial;
+
+		meshRenderer.material = ballMaterial;
+
+    }
 
 	void FixedUpdate () {
 		Vector3 gravity = CustomGravity.GetGravity(body.position, out upAxis);
@@ -326,24 +336,33 @@ public class MovingSphere : MonoBehaviour {
 		zAxis = ProjectDirectionOnPlane(zAxis, contactNormal);
 		
 		Vector3 relativeVelocity = velocity - connectionVelocity;
-		float currentX = Vector3.Dot(relativeVelocity, xAxis);
-		float currentZ = Vector3.Dot(relativeVelocity, zAxis);
+		//float currentX = Vector3.Dot(relativeVelocity, xAxis);
+		//float currentZ = Vector3.Dot(relativeVelocity, zAxis);
 
-		float maxSpeedChange = acceleration * Time.deltaTime;
+		Vector3 adjustment;
+		adjustment.x = playerInput.x * speed - Vector3.Dot(relativeVelocity, xAxis);
+		adjustment.z = playerInput.z * speed - Vector3.Dot(relativeVelocity, zAxis);
+		adjustment.y = Swimming ? playerInput.y * speed - Vector3.Dot(relativeVelocity, upAxis) : 0f;
 
-		float newX =
-			Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
-		float newZ =
-			Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
+		//float maxSpeedChange = acceleration * Time.deltaTime;
 
-		velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+		//float newX =
+		//	Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
+		//float newZ =
+		//	Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
+
+		adjustment = Vector3.ClampMagnitude(adjustment, acceleration * Time.deltaTime);
+
+		//velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+		velocity += xAxis * adjustment.x + zAxis * adjustment.z;
 
 		if (Swimming) {
-			float currentY = Vector3.Dot(relativeVelocity, upAxis);
-			float newY = Mathf.MoveTowards(
-				currentY, playerInput.z * speed, maxSpeedChange
-			);
-			velocity += upAxis * (newY - currentY);
+			//float currentY = Vector3.Dot(relativeVelocity, upAxis);
+			//float newY = Mathf.MoveTowards(
+			//	currentY, playerInput.z * speed, maxSpeedChange
+			//);
+			//velocity += upAxis * (newY - currentY);
+			velocity += upAxis * adjustment.y;
 		}
 	}
 
