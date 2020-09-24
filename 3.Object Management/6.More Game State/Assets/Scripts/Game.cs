@@ -22,13 +22,13 @@ public class Game : PersistableObject
     bool ressedOnLoad;
 
     //public SpawnZone spawnZone;
-    public SpawnZone SpawnZoneOfLevel { get; set; }
+    //public SpawnZone SpawnZoneOfLevel { get; set; }
 
     public float CreationSpeed { get; set; }
 
     public float DestructionSpeed { get; set; }
 
-    public static Game Instance { get; private set; }
+    //public static Game Instance { get; private set; }
 
     const int saveVersion = 3;
 
@@ -59,7 +59,7 @@ public class Game : PersistableObject
     {
         mainRandomState = Random.state;
 
-        Instance = this;
+        //Instance = this;
 
         shapes = new List<Shape>();
 
@@ -132,17 +132,17 @@ public class Game : PersistableObject
         }
     }
 
-    void OnEnable()
-    {
-        Instance = this;
-    }
+    //void OnEnable()
+    //{
+    //    Instance = this;
+    //}
 
     void CreateShape()
     {
         Shape instance = shapeFactory.GetRandom();
         Transform t = instance.transform;
         //t.localPosition = Random.insideUnitSphere * 5f;
-        t.localPosition = SpawnZoneOfLevel.SpawnPoint;
+        t.localPosition = GameLevel.Current.SpawnPoint;
         t.localRotation = Random.rotation;
         t.localScale = Vector3.one * Random.Range(0.1f, 1f);
         shapes.Add(instance);
@@ -179,6 +179,7 @@ public class Game : PersistableObject
         writer.Write(shapes.Count);
         writer.Write(Random.state);
         writer.Write(loadedLevelBuildIndex);
+        GameLevel.Current.Save(writer);
         for(int i = 0; i < shapes.Count; ++i)
         {
             writer.Write(shapes[i].ShapeId);
@@ -196,8 +197,14 @@ public class Game : PersistableObject
             return;
         }
 
+        StartCoroutine(LoadGame(reader));
+    }
+
+    IEnumerator LoadGame(GameDataReader reader)
+    {
+        int version = reader.Version;
         int count = version <= 0 ? -version : reader.ReaderInt();
-        if (version >= 3) 
+        if (version >= 3)
         {
             Random.State state = reader.ReadRandomState();
             if (!ressedOnLoad)
@@ -205,9 +212,15 @@ public class Game : PersistableObject
                 Random.state = state;
             }
         }
-        
-        StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReaderInt()));
-        for(int i = 0; i < count; ++i)
+
+        //StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReaderInt()));
+        yield return LoadLevel(version < 2 ? 1 : reader.ReaderInt());
+        if(version >= 3)
+        {
+            GameLevel.Current.Load(reader);
+        }
+
+        for (int i = 0; i < count; ++i)
         {
             int shapeId = version > 0 ? reader.ReaderInt() : 0;
             int materialId = version > 0 ? reader.ReaderInt() : 0;

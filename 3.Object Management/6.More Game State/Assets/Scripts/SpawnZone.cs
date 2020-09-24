@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class SpawnZone : MonoBehaviour
+public abstract class SpawnZone : PersistableObject
 {
     //[SerializeField]
     //bool surfaceOnly;

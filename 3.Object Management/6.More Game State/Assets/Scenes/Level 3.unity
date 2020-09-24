@@ -240,8 +240,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651125621}
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 2, z: 5}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 808379057}
   m_RootOrder: 2
@@ -293,6 +293,7 @@ MonoBehaviour:
   - {fileID: 1979899677}
   - {fileID: 651125623}
   - {fileID: 1286730252}
+  sequential: 1
 --- !u!4 &808379057
 Transform:
   m_ObjectHideFlags: 0
@@ -335,13 +336,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859966365}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 808379057}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &859966367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnZone: {fileID: 808379056}
+  persistableObjects:
+  - {fileID: 808379056}
 --- !u!4 &1108161004
 Transform:
   m_ObjectHideFlags: 0
@@ -424,8 +427,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286730250}
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 2, z: 5}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 808379057}
   m_RootOrder: 3
@@ -442,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae87293481949ae4e9e42cd6c10a550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceOnly: 0
+  surfaceOnly: 1
 --- !u!1 &1979899675
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,4 +489,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceOnly: 0
+  surfaceOnly: 1
