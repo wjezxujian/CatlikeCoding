@@ -18,6 +18,9 @@ public class Game : PersistableObject
     [SerializeField]
     int levelCount;
 
+    [SerializeField]
+    bool ressedOnLoad;
+
     //public SpawnZone spawnZone;
     public SpawnZone SpawnZoneOfLevel { get; set; }
 
@@ -27,13 +30,15 @@ public class Game : PersistableObject
 
     public static Game Instance { get; private set; }
 
-    const int saveVersion = 2;
+    const int saveVersion = 3;
 
     List<Shape> shapes;
 
     float creationProgress, destructionProgress;
 
     int loadedLevelBuildIndex;
+
+    Random.State mainRandomState;
 
 
     //void Awake()
@@ -52,6 +57,8 @@ public class Game : PersistableObject
 
     private void Start()
     {
+        mainRandomState = Random.state;
+
         Instance = this;
 
         shapes = new List<Shape>();
@@ -68,8 +75,9 @@ public class Game : PersistableObject
                     return;
                 }
             }
-        }        
+        }
 
+        BeginNewGame();
         StartCoroutine(LoadLevel(1));
     }
 
@@ -154,6 +162,11 @@ public class Game : PersistableObject
 
     void BeginNewGame()
     {
+        Random.state = mainRandomState;
+        int seed = Random.Range(0, int.MaxValue) ^ (int)Time.unscaledTime;
+        Random.InitState(seed);
+        mainRandomState = Random.state;
+
         for(int i = 0; i < shapes.Count; ++i)
         {
             shapeFactory.Reclaim(shapes[i]);
@@ -164,6 +177,7 @@ public class Game : PersistableObject
     public override void Save(GameDataWriter writer)
     {
         writer.Write(shapes.Count);
+        writer.Write(Random.state);
         writer.Write(loadedLevelBuildIndex);
         for(int i = 0; i < shapes.Count; ++i)
         {
@@ -183,6 +197,15 @@ public class Game : PersistableObject
         }
 
         int count = version <= 0 ? -version : reader.ReaderInt();
+        if (version >= 3) 
+        {
+            Random.State state = reader.ReadRandomState();
+            if (!ressedOnLoad)
+            {
+                Random.state = state;
+            }
+        }
+        
         StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReaderInt()));
         for(int i = 0; i < count; ++i)
         {
