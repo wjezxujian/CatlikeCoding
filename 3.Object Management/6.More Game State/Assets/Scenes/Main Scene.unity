@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587272, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -499,7 +499,10 @@ MonoBehaviour:
   saveKey: 115
   loadKey: 108
   storage: {fileID: 1907389475}
-  levelCount: 3
+  levelCount: 4
+  ressedOnLoad: 0
+  creationSpeedSlider: {fileID: 47718629}
+  destructionSpeedSlider: {fileID: 1215387401}
 --- !u!1 &715582953
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,8 +720,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.05232124, y: 0.9294198, z: -0.14504366, w: -0.33526665}
+  m_LocalPosition: {x: 15.864571, y: 9.300182, z: 17.56054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
