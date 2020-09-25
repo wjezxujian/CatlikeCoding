@@ -35,7 +35,7 @@ public class Game : PersistableObject
 
     //public static Game Instance { get; private set; }
 
-    const int saveVersion = 3;
+    const int saveVersion = 4;
 
     List<Shape> shapes;
 
@@ -128,6 +128,11 @@ public class Game : PersistableObject
 
     private void FixedUpdate()
     {
+        for(int i = 0; i < shapes.Count; i++)
+        {
+            shapes[i].GameUpdate();
+        }
+
         creationProgress += Time.deltaTime * CreationSpeed;
         while (creationProgress >= 1f)
         {
@@ -151,11 +156,14 @@ public class Game : PersistableObject
     void CreateShape()
     {
         Shape instance = shapeFactory.GetRandom();
-        Transform t = instance.transform;
-        //t.localPosition = Random.insideUnitSphere * 5f;
-        t.localPosition = GameLevel.Current.SpawnPoint;
-        t.localRotation = Random.rotation;
-        t.localScale = Vector3.one * Random.Range(0.1f, 1f);
+        //Transform t = instance.transform;
+        ////t.localPosition = Random.insideUnitSphere * 5f;
+        //t.localPosition = GameLevel.Current.SpawnPoint;
+        //t.localRotation = Random.rotation;
+        //t.localScale = Vector3.one * Random.Range(0.1f, 1f);
+        //instance.AngularVelocity = Random.onUnitSphere * Random.Range(0f, 90f);
+        //instance.Velocity = Random.onUnitSphere * Random.Range(0, 2f);
+        GameLevel.Current.ConfigureSpawn(instance);
         shapes.Add(instance);
     }
 
