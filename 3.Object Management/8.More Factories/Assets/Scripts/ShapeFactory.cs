@@ -19,6 +19,26 @@ public class ShapeFactory : ScriptableObject
 
     Scene poolScene;
 
+    [System.NonSerialized]
+    int factoryId = int.MinValue;
+
+    public int FactoryId
+    {
+        get { return factoryId; }
+
+        set
+        {
+            if(factoryId == int.MinValue && value != int.MinValue)
+            {
+                factoryId = value;
+            }
+            else
+            {
+                Debug.LogError("Not allowed to change factoryId.");
+            }
+        }
+    }
+
     public Shape Get(int shapeId = 0, int materialId = 0)
     {
         Shape instance;
@@ -40,6 +60,7 @@ public class ShapeFactory : ScriptableObject
             else
             {
                 instance = Instantiate(prefabs[shapeId]);
+                instance.OriginFactory = this;
                 instance.ShapeId = shapeId;
                 SceneManager.MoveGameObjectToScene(instance.gameObject, poolScene);
             }        
@@ -47,12 +68,13 @@ public class ShapeFactory : ScriptableObject
         else
         {
             instance = Instantiate(prefabs[shapeId]);
-            instance.ShapeId = shapeId; 
-            SceneManager.MoveGameObjectToScene(instance.gameObject, poolScene);
+            instance.ShapeId = shapeId;
+            instance.OriginFactory = this;
+            //SceneManager.MoveGameObjectToScene(instance.gameObject, poolScene);
         }
 
         instance.SetMaterial(materials[materialId], materialId);
-        instance.SetColor(Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.25f, 1f, 1f, 1f));
+        //instance.SetColor(Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.25f, 1f, 1f, 1f));
         return instance;
     }
 
@@ -65,6 +87,11 @@ public class ShapeFactory : ScriptableObject
 
     public void Reclaim(Shape shapeToRecycle)
     {
+        if(shapeToRecycle.OriginFactory != this)
+        {
+            Debug.LogError("Tried to reclaim shape with wrong factory.");
+        }
+
         if (recycle)
         {
             if (pools == null)

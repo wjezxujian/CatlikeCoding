@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class Game : PersistableObject
 {
+    //[SerializeField]
+    //ShapeFactory shapeFactory;
     [SerializeField]
-    ShapeFactory shapeFactory;
+    ShapeFactory[] shapeFactories;
 
     [SerializeField]
     KeyCode createKey = KeyCode.C, destroyKey = KeyCode.X,
@@ -24,6 +26,9 @@ public class Game : PersistableObject
 
     [SerializeField]
     Slider creationSpeedSlider, destructionSpeedSlider;
+
+    
+
    
 
     //public SpawnZone spawnZone;
@@ -35,7 +40,7 @@ public class Game : PersistableObject
 
     //public static Game Instance { get; private set; }
 
-    const int saveVersion = 4;
+    const int saveVersion = 5;
 
     List<Shape> shapes;
 
@@ -59,6 +64,18 @@ public class Game : PersistableObject
 
     //    StartCoroutine(LoadLevel());
     //}
+
+    private void OnEnable()
+    {
+        if(shapeFactories[0].FactoryId != 0)
+        {
+            for (int i = 0; i < shapeFactories.Length; ++i)
+            {
+                shapeFactories[i].FactoryId = i;
+            }
+        }
+        
+    }
 
     private void Start()
     {
@@ -155,7 +172,7 @@ public class Game : PersistableObject
 
     void CreateShape()
     {
-        Shape instance = shapeFactory.GetRandom();
+        //Shape instance = shapeFactory.GetRandom();
         //Transform t = instance.transform;
         ////t.localPosition = Random.insideUnitSphere * 5f;
         //t.localPosition = GameLevel.Current.SpawnPoint;
@@ -163,8 +180,8 @@ public class Game : PersistableObject
         //t.localScale = Vector3.one * Random.Range(0.1f, 1f);
         //instance.AngularVelocity = Random.onUnitSphere * Random.Range(0f, 90f);
         //instance.Velocity = Random.onUnitSphere * Random.Range(0, 2f);
-        GameLevel.Current.ConfigureSpawn(instance);
-        shapes.Add(instance);
+        //GameLevel.Current.ConfigureSpawn(instance);
+        shapes.Add(GameLevel.Current.SpawnShape());
     }
 
     void DestroyShape()
@@ -172,7 +189,8 @@ public class Game : PersistableObject
         if (shapes.Count > 0)
         {
             int index = Random.Range(0, shapes.Count);
-            shapeFactory.Reclaim(shapes[index]);
+            //shapeFactory.Reclaim(shapes[index]);
+            shapes[index].Recyle();
             int lastIndex = shapes.Count - 1;
             shapes[index] = shapes[lastIndex];
             shapes.RemoveAt(lastIndex);
@@ -192,7 +210,8 @@ public class Game : PersistableObject
 
         for(int i = 0; i < shapes.Count; ++i)
         {
-            shapeFactory.Reclaim(shapes[i]);
+            //shapeFactory.Reclaim(shapes[i]);
+            shapes[i].Recyle();
         }
         shapes.Clear();
     }
@@ -209,6 +228,7 @@ public class Game : PersistableObject
         GameLevel.Current.Save(writer);
         for(int i = 0; i < shapes.Count; ++i)
         {
+            writer.Write(shapes[i].OriginFactory.FactoryId);
             writer.Write(shapes[i].ShapeId);
             writer.Write(shapes[i].MaterialId);
             shapes[i].Save(writer);
@@ -254,9 +274,10 @@ public class Game : PersistableObject
 
         for (int i = 0; i < count; ++i)
         {
+            int factoryId = version >= 5 ? reader.ReaderInt() : 0;
             int shapeId = version > 0 ? reader.ReaderInt() : 0;
             int materialId = version > 0 ? reader.ReaderInt() : 0;
-            Shape instance = shapeFactory.Get(shapeId, materialId);
+            Shape instance = shapeFactories[factoryId].Get(shapeId, materialId);
             instance.Load(reader);
             shapes.Add(instance);
         }

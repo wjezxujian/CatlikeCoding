@@ -34,11 +34,37 @@ public class CompositeSpawnZone : SpawnZone
         }
     }
 
-    public override void ConfigureSpawn(Shape shape)
+    //public override void ConfigureSpawn(Shape shape)
+    //{
+    //    if (overrideConfig)
+    //    {
+    //        base.ConfigureSpawn(shape);
+    //    }
+    //    else
+    //    {
+    //        int index;
+    //        if (sequential)
+    //        {
+    //            index = nextSequentialIndex++;
+    //            if (nextSequentialIndex >= spawnZones.Length)
+    //            {
+    //                nextSequentialIndex = 0;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            index = Random.Range(0, spawnZones.Length);
+    //        }
+
+    //        spawnZones[index].ConfigureSpawn(shape);
+    //    }
+    //}
+
+    public override Shape SpawnShape()
     {
         if (overrideConfig)
         {
-            base.ConfigureSpawn(shape);
+            return base.SpawnShape();
         }
         else
         {
@@ -50,14 +76,16 @@ public class CompositeSpawnZone : SpawnZone
                 {
                     nextSequentialIndex = 0;
                 }
+
             }
             else
             {
                 index = Random.Range(0, spawnZones.Length);
             }
 
-            spawnZones[index].ConfigureSpawn(shape);
+            return spawnZones[index].SpawnShape();
         }
+        
     }
 
     public override void Save(GameDataWriter writer)

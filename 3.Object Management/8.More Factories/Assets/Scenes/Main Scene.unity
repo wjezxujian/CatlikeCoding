@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: a8b65f47d250fd54982fcb0889b05ef1, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e9b7930dfee17dd4a8bd28224adf3ea3, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3d437f9018791f04eb061ae0bf161164, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -492,14 +492,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a26780c44dd79448d831f48ec3bca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeFactory: {fileID: 11400000, guid: 69e2f9a59025ef74d912565aabbbb87a, type: 2}
+  shapeFactories:
+  - {fileID: 11400000, guid: 69e2f9a59025ef74d912565aabbbb87a, type: 2}
+  - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
   createKey: 99
   destroyKey: 120
   newGameKey: 110
   saveKey: 115
   loadKey: 108
   storage: {fileID: 1907389475}
-  levelCount: 4
+  levelCount: 5
   ressedOnLoad: 0
   creationSpeedSlider: {fileID: 47718629}
   destructionSpeedSlider: {fileID: 1215387401}

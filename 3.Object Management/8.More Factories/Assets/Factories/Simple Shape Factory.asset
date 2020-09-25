@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ad5b55d2f27c5f4b8763ce720034792, type: 3}
-  m_Name: Shape Factory
+  m_Name: Simple Shape Factory
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 9213160070959009283, guid: 595bcc439b9e5bc4b9c4d820e050b602, type: 3}
