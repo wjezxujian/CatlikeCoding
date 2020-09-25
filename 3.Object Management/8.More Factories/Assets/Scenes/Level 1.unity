@@ -304,6 +304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnConfg:
+    factories:
+    - {fileID: 11400000, guid: 69e2f9a59025ef74d912565aabbbb87a, type: 2}
+    - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
     movementDirection: 2
     speed:
       min: 1.5
@@ -324,4 +327,5 @@ MonoBehaviour:
       value:
         min: 0.25
         max: 1
+    uniformColor: 0
   surfaceOnly: 0

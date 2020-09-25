@@ -67,7 +67,7 @@ public class Game : PersistableObject
 
     private void OnEnable()
     {
-        if(shapeFactories[0].FactoryId != 0)
+        if(shapeFactories.Length > 0 && shapeFactories[0].FactoryId != 0)
         {
             for (int i = 0; i < shapeFactories.Length; ++i)
             {

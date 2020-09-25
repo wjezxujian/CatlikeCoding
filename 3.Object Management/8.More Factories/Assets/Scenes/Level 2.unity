@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4302361, g: 0.4650904, b: 0.49672538, a: 1}
+  m_IndirectSpecularColor: {r: 0.15505353, g: 0.18314008, b: 0.21102275, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -244,6 +244,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnConfg:
+    factories:
+    - {fileID: 11400000, guid: 69e2f9a59025ef74d912565aabbbb87a, type: 2}
+    - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
+    movementDirection: 0
+    speed:
+      min: 0
+      max: 0
+    angularSpeed:
+      min: 0
+      max: 0
+    scale:
+      min: 0
+      max: 0
+    color:
+      hue:
+        min: 0
+        max: 0
+      saturation:
+        min: 0
+        max: 0
+      value:
+        min: 0
+        max: 0
+    uniformColor: 0
   surfaceOnly: 1
 --- !u!4 &808379057
 Transform:
@@ -289,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnZone: {fileID: 808379056}
+  persistableObjects: []
 --- !u!4 &1108161004
 Transform:
   m_ObjectHideFlags: 0
