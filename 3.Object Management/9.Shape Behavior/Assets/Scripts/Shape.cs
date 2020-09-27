@@ -16,6 +16,8 @@ public class Shape : PersistableObject
 
     ShapeFactory originFactory;
 
+    List<ShapeBehaviour> behaviourList = new List<ShapeBehaviour>();
+
     static int colorPropertyId = Shader.PropertyToID("_Color");
     static MaterialPropertyBlock sharedPropertyBlock;
 
@@ -42,8 +44,8 @@ public class Shape : PersistableObject
         private set;
     }
 
-    public Vector3 AngularVelocity { get; set; }
-    public Vector3 Velocity { get; set; }
+    //public Vector3 AngularVelocity { get; set; }
+    //public Vector3 Velocity { get; set; }
 
     public int ColorCount { get { return colors.Length; } }
 
@@ -64,6 +66,8 @@ public class Shape : PersistableObject
         }
     }
 
+    public float Age { get; private set; }
+
     private void Awake()
     {
         //meshRenderer = GetComponent<MeshRenderer>();
@@ -73,12 +77,27 @@ public class Shape : PersistableObject
     //private void FixedUpdate()
     public void GameUpdate()
     {
-        transform.Rotate(AngularVelocity * Time.deltaTime);
-        transform.localPosition += Velocity * Time.deltaTime;
+        //transform.Rotate(AngularVelocity * Time.deltaTime);
+        //transform.localPosition += Velocity * Time.deltaTime;
+
+        Age += Time.deltaTime;
+
+        for(int i = 0; i < behaviourList.Count; ++i)
+        {
+            behaviourList[i].GameUpdate(this);
+        }
     }
 
-    public void Recyle()
+    public void Recycle()
     {
+        Age = 0f;
+
+        for(int i = 0; i < behaviourList.Count; ++i)
+        {
+            //Destroy(behaviourList[i]);
+            behaviourList[i].Recyle();
+        }
+        behaviourList.Clear();
         OriginFactory.Reclaim(this);
     }
 
@@ -127,8 +146,15 @@ public class Shape : PersistableObject
         {
             writer.Write(colors[i]);
         }
-        writer.Write(AngularVelocity);
-        writer.Write(Velocity);
+        //writer.Write(AngularVelocity);
+        //writer.Write(Velocity);
+        writer.Write(Age);
+        writer.Write(behaviourList.Count);
+        for(int i = 0; i < behaviourList.Count; ++i)
+        {
+            writer.Write((int)behaviourList[i].BehaviourType);
+            behaviourList[i].Save(writer);
+        }
     }
 
     public override void Load(GameDataReader reader)
@@ -147,18 +173,35 @@ public class Shape : PersistableObject
             SetColor(reader.Version > 0 ? reader.ReadColor() : Color.white);
         }
         
-        AngularVelocity = reader.Version >= 4 ? reader.ReadVector3() : Vector3.zero;
-        Velocity = reader.Version >= 4 ? reader.ReadVector3() : Vector3.zero;
+        //AngularVelocity = reader.Version >= 4 ? reader.ReadVector3() : Vector3.zero;
+        //Velocity = reader.Version >= 4 ? reader.ReadVector3() : Vector3.zero;
+        if(reader.Version >= 6)
+        {
+            Age = reader.ReadFloat();
+            int behaviourCount = reader.ReadInt();
+            for(int i = 0; i < behaviourCount; ++i)
+            {
+                //AddBehaviour((ShapeBehaviourType)reader.ReadInt()).Load(reader);
+                ShapeBehaviour behabviour = ((ShapeBehaviourType)reader.ReadInt()).GetInstance();
+                behaviourList.Add(behabviour);
+                behabviour.Load(reader);
+                
+            }
+        }else if(reader.Version >= 4)
+        {
+            AddBehaviour<RotationShapeBehaviour>().AngularVelocity = reader.ReadVector3();
+            AddBehaviour<MovementShapeBehaviour>().Velocity = reader.ReadVector3();
+        }
     }
 
     void LoadColors(GameDataReader reader)
     {
-        int count = reader.ReaderInt();
+        int count = reader.ReadInt();
         int max = count <= colors.Length ? count : colors.Length;
         int i = 0;
         for(; i < max; ++i)
         {
-            SetColor(reader.ReadColor(), 1);
+            SetColor(reader.ReadColor(), i);
         }
 
         if(count > colors.Length)
@@ -175,6 +218,31 @@ public class Shape : PersistableObject
             }
         }
     }
+
+    public T AddBehaviour<T>() where T : ShapeBehaviour, new()
+    {
+        T behaviour = ShapeBehaviourPool<T>.Get();
+        behaviourList.Add(behaviour);
+        return behaviour;
+    }
+
+    //private ShapeBehaviour AddBehaviour(ShapeBehaviourType type)
+    //{
+    //    switch (type)
+    //    {
+    //        case ShapeBehaviourType.Movement:
+    //            return AddBehaviour<MovementShapeBehaviour>();
+    //        case ShapeBehaviourType.Rotation:
+    //            return AddBehaviour<RotationShapeBehaviour>();
+    //    }
+
+    //    Debug.LogError("Forgot to support " + type);
+    //    return null;
+    //}
+
+    
+
+
 
 
 

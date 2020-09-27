@@ -40,7 +40,7 @@ public class Game : PersistableObject
 
     //public static Game Instance { get; private set; }
 
-    const int saveVersion = 5;
+    const int saveVersion = 6;
 
     List<Shape> shapes;
 
@@ -190,7 +190,7 @@ public class Game : PersistableObject
         {
             int index = Random.Range(0, shapes.Count);
             //shapeFactory.Reclaim(shapes[index]);
-            shapes[index].Recyle();
+            shapes[index].Recycle();
             int lastIndex = shapes.Count - 1;
             shapes[index] = shapes[lastIndex];
             shapes.RemoveAt(lastIndex);
@@ -211,7 +211,7 @@ public class Game : PersistableObject
         for(int i = 0; i < shapes.Count; ++i)
         {
             //shapeFactory.Reclaim(shapes[i]);
-            shapes[i].Recyle();
+            shapes[i].Recycle();
         }
         shapes.Clear();
     }
@@ -250,7 +250,7 @@ public class Game : PersistableObject
     IEnumerator LoadGame(GameDataReader reader)
     {
         int version = reader.Version;
-        int count = version <= 0 ? -version : reader.ReaderInt();
+        int count = version <= 0 ? -version : reader.ReadInt();
         if (version >= 3)
         {
             Random.State state = reader.ReadRandomState();
@@ -259,14 +259,14 @@ public class Game : PersistableObject
                 Random.state = state;
             }
 
-            creationSpeedSlider.value = CreationSpeed = reader.ReaderFloat();
-            creationProgress = reader.ReaderFloat();
-            destructionSpeedSlider.value = DestructionSpeed = reader.ReaderFloat();
-            destructionProgress = reader.ReaderFloat();
+            creationSpeedSlider.value = CreationSpeed = reader.ReadFloat();
+            creationProgress = reader.ReadFloat();
+            destructionSpeedSlider.value = DestructionSpeed = reader.ReadFloat();
+            destructionProgress = reader.ReadFloat();
         }
 
-        //StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReaderInt()));
-        yield return LoadLevel(version < 2 ? 1 : reader.ReaderInt());
+        //StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReadInt()));
+        yield return LoadLevel(version < 2 ? 1 : reader.ReadInt());
         if(version >= 3)
         {
             GameLevel.Current.Load(reader);
@@ -274,9 +274,9 @@ public class Game : PersistableObject
 
         for (int i = 0; i < count; ++i)
         {
-            int factoryId = version >= 5 ? reader.ReaderInt() : 0;
-            int shapeId = version > 0 ? reader.ReaderInt() : 0;
-            int materialId = version > 0 ? reader.ReaderInt() : 0;
+            int factoryId = version >= 5 ? reader.ReadInt() : 0;
+            int shapeId = version > 0 ? reader.ReadInt() : 0;
+            int materialId = version > 0 ? reader.ReadInt() : 0;
             Shape instance = shapeFactories[factoryId].Get(shapeId, materialId);
             instance.Load(reader);
             shapes.Add(instance);

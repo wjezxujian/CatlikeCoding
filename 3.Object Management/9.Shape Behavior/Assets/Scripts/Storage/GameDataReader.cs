@@ -14,12 +14,12 @@ public class GameDataReader : MonoBehaviour
         this.Version = version;
     }
 
-    public float ReaderFloat()
+    public float ReadFloat()
     {
         return reader.ReadSingle();
     }
 
-    public int ReaderInt()
+    public int ReadInt()
     {
         return reader.ReadInt32();
     }

@@ -51,7 +51,7 @@ public class GameLevel : PersistableObject
 
     public override void Load(GameDataReader reader)
     {
-        int saveCount = reader.ReaderInt();
+        int saveCount = reader.ReadInt();
         for (int i = 0; i < saveCount; ++i)
         {
             persistableObjects[i].Load(reader);

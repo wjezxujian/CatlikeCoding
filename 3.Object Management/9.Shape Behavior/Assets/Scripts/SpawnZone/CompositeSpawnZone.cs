@@ -95,6 +95,6 @@ public class CompositeSpawnZone : SpawnZone
 
     public override void Load(GameDataReader reader)
     {
-        nextSequentialIndex = reader.ReaderInt();
+        nextSequentialIndex = reader.ReadInt();
     }
 }
