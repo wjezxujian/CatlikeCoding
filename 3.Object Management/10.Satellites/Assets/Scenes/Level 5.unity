@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae87293481949ae4e9e42cd6c10a550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnConfg:
+  spawnConfig:
     factories: []
     movementDirection: 0
     speed:
@@ -318,46 +318,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2d971816deba740a4dc5c5a04ad867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnConfg:
+  spawnConfig:
     factories:
-    - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
     - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
     - {fileID: 11400000, guid: 69e2f9a59025ef74d912565aabbbb87a, type: 2}
     movementDirection: 0
     speed:
-      min: 0
-      max: 0
+      min: -2
+      max: -1
     angularSpeed:
       min: 0
-      max: 90
+      max: 0
     scale:
-      min: 0.1
+      min: 1
       max: 1
     color:
       hue:
         min: 0
         max: 1
       saturation:
-        min: 0.5
+        min: 0
         max: 1
       value:
-        min: 0.25
+        min: 0
         max: 1
     uniformColor: 0
-    oscillationDirection: 2
+    oscillationDirection: 0
     oscillationAmplitude:
-      min: 0.1
-      max: 1
+      min: 0
+      max: 0
     oscillationFrequency:
-      min: 1
-      max: 1
+      min: 0
+      max: 0
   spawnZones:
   - {fileID: 859966367}
   - {fileID: 1979899677}
   - {fileID: 651125623}
   - {fileID: 1286730252}
   sequential: 1
-  overrideConfig: 1
+  overrideConfig: 0
 --- !u!4 &808379057
 Transform:
   m_ObjectHideFlags: 0
@@ -367,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 808379055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 859966366}
   - {fileID: 1979899676}
@@ -419,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnConfg:
+  spawnConfig:
     factories: []
     movementDirection: 0
     speed:
@@ -539,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae87293481949ae4e9e42cd6c10a550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnConfg:
+  spawnConfig:
     factories: []
     movementDirection: 0
     speed:
@@ -613,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnConfg:
+  spawnConfig:
     factories: []
     movementDirection: 0
     speed:

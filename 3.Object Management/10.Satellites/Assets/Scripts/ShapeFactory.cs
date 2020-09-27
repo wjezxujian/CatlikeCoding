@@ -70,11 +70,10 @@ public class ShapeFactory : ScriptableObject
             instance = Instantiate(prefabs[shapeId]);
             instance.ShapeId = shapeId;
             instance.OriginFactory = this;
-            //SceneManager.MoveGameObjectToScene(instance.gameObject, poolScene);
         }
 
         instance.SetMaterial(materials[materialId], materialId);
-        //instance.SetColor(Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.25f, 1f, 1f, 1f));
+        Game.Instance.AddShape(instance);
         return instance;
     }
 

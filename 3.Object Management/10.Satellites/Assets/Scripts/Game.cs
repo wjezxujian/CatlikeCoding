@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class Game : PersistableObject
 {
-    //[SerializeField]
-    //ShapeFactory shapeFactory;
+    const int saveVersion = 6;
+
+    public static Game Instance { get; private set; }
+
     [SerializeField]
     ShapeFactory[] shapeFactories;
 
@@ -27,10 +29,6 @@ public class Game : PersistableObject
     [SerializeField]
     Slider creationSpeedSlider, destructionSpeedSlider;
 
-    
-
-   
-
     //public SpawnZone spawnZone;
     //public SpawnZone SpawnZoneOfLevel { get; set; }
 
@@ -39,8 +37,6 @@ public class Game : PersistableObject
     public float DestructionSpeed { get; set; }
 
     //public static Game Instance { get; private set; }
-
-    const int saveVersion = 6;
 
     List<Shape> shapes;
 
@@ -67,6 +63,8 @@ public class Game : PersistableObject
 
     private void OnEnable()
     {
+        Instance = this;
+
         if(shapeFactories.Length > 0 && shapeFactories[0].FactoryId != 0)
         {
             for (int i = 0; i < shapeFactories.Length; ++i)
@@ -108,7 +106,8 @@ public class Game : PersistableObject
     {
         if (Input.GetKeyDown(createKey))
         {
-            CreateShape();
+            //CreateShape();
+            GameLevel.Current.SpawnShapes();
         }
         else if (Input.GetKeyDown(destroyKey))
         {
@@ -154,7 +153,8 @@ public class Game : PersistableObject
         while (creationProgress >= 1f)
         {
             creationProgress -= 1f;
-            CreateShape();
+            //CreateShape();
+            GameLevel.Current.SpawnShapes();
         }
 
         destructionProgress += Time.deltaTime * DestructionSpeed;
@@ -164,11 +164,6 @@ public class Game : PersistableObject
             DestroyShape();
         }
     }
-
-    //void OnEnable()
-    //{
-    //    Instance = this;
-    //}
 
     void CreateShape()
     {
@@ -181,7 +176,8 @@ public class Game : PersistableObject
         //instance.AngularVelocity = Random.onUnitSphere * Random.Range(0f, 90f);
         //instance.Velocity = Random.onUnitSphere * Random.Range(0, 2f);
         //GameLevel.Current.ConfigureSpawn(instance);
-        shapes.Add(GameLevel.Current.SpawnShape());
+        //shapes.Add(GameLevel.Current.SpawnShape());
+        GameLevel.Current.SpawnShapes();
     }
 
     void DestroyShape()
@@ -214,6 +210,11 @@ public class Game : PersistableObject
             shapes[i].Recycle();
         }
         shapes.Clear();
+    }
+
+    public void AddShape(Shape shape)
+    {
+        shapes.Add(shape);
     }
 
     public override void Save(GameDataWriter writer)
@@ -279,7 +280,7 @@ public class Game : PersistableObject
             int materialId = version > 0 ? reader.ReadInt() : 0;
             Shape instance = shapeFactories[factoryId].Get(shapeId, materialId);
             instance.Load(reader);
-            shapes.Add(instance);
+            //shapes.Add(instance);
         }
     }
 
