@@ -1,0 +1,54 @@
+﻿using System.Globalization;
+using UnityEngine;
+
+public class GameLevel : PersistableObject
+{
+    [SerializeField]
+    int popularionLimit;
+
+    [SerializeField]
+    SpawnZone spawnZone;
+
+    [SerializeField]
+    PersistableObject[] persistableObjects;
+
+    public static GameLevel Current { get; private set; }
+
+    public int PopulationLimit
+    {
+        get { return popularionLimit; }
+    }
+
+    public void SpawnShapes()
+    {
+        spawnZone.SpawnShapes();
+    }
+
+    private void OnEnable()
+    {
+        Current = this;
+
+        if(persistableObjects == null)
+        {
+            persistableObjects = new PersistableObject[0];
+        }
+    }
+
+    public override void Save(GameDataWriter writer)
+    {
+        writer.Write(persistableObjects.Length);
+        for(int i = 0; i < persistableObjects.Length; ++i)
+        {
+            persistableObjects[i].Save(writer);
+        }
+    }
+
+    public override void Load(GameDataReader reader)
+    {
+        int saveCount = reader.ReadInt();
+        for (int i = 0; i < saveCount; ++i)
+        {
+            persistableObjects[i].Load(reader);
+        }
+    }
+}
