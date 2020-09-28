@@ -29,14 +29,9 @@ public class Game : PersistableObject
     [SerializeField]
     Slider creationSpeedSlider, destructionSpeedSlider;
 
-    //public SpawnZone spawnZone;
-    //public SpawnZone SpawnZoneOfLevel { get; set; }
-
     public float CreationSpeed { get; set; }
 
     public float DestructionSpeed { get; set; }
-
-    //public static Game Instance { get; private set; }
 
     List<Shape> shapes;
 
@@ -45,21 +40,6 @@ public class Game : PersistableObject
     int loadedLevelBuildIndex;
 
     Random.State mainRandomState;
-
-
-    //void Awake()
-    //{
-    //    shapes = new List<Shape>();
-
-    //    Scene loadedLevel = SceneManager.GetSceneByName("Level 1");
-    //    if (loadedLevel.isLoaded)
-    //    {
-    //        SceneManager.SetActiveScene(loadedLevel);
-    //        return;
-    //    }
-
-    //    StartCoroutine(LoadLevel());
-    //}
 
     private void OnEnable()
     {
@@ -78,8 +58,6 @@ public class Game : PersistableObject
     private void Start()
     {
         mainRandomState = Random.state;
-
-        //Instance = this;
 
         shapes = new List<Shape>();
 
@@ -101,12 +79,10 @@ public class Game : PersistableObject
         StartCoroutine(LoadLevel(1));
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(createKey))
         {
-            //CreateShape();
             GameLevel.Current.SpawnShapes();
         }
         else if (Input.GetKeyDown(destroyKey))
@@ -138,8 +114,6 @@ public class Game : PersistableObject
                 }
             }
         }
-
-        
     }
 
     private void FixedUpdate()
@@ -153,7 +127,6 @@ public class Game : PersistableObject
         while (creationProgress >= 1f)
         {
             creationProgress -= 1f;
-            //CreateShape();
             GameLevel.Current.SpawnShapes();
         }
 
@@ -174,27 +147,11 @@ public class Game : PersistableObject
         }
     }
 
-    void CreateShape()
-    {
-        //Shape instance = shapeFactory.GetRandom();
-        //Transform t = instance.transform;
-        ////t.localPosition = Random.insideUnitSphere * 5f;
-        //t.localPosition = GameLevel.Current.SpawnPoint;
-        //t.localRotation = Random.rotation;
-        //t.localScale = Vector3.one * Random.Range(0.1f, 1f);
-        //instance.AngularVelocity = Random.onUnitSphere * Random.Range(0f, 90f);
-        //instance.Velocity = Random.onUnitSphere * Random.Range(0, 2f);
-        //GameLevel.Current.ConfigureSpawn(instance);
-        //shapes.Add(GameLevel.Current.SpawnShape());
-        GameLevel.Current.SpawnShapes();
-    }
-
     void DestroyShape()
     {
         if (shapes.Count > 0)
         {
             int index = Random.Range(0, shapes.Count);
-            //shapeFactory.Reclaim(shapes[index]);
             shapes[index].Recycle();
             int lastIndex = shapes.Count - 1;
             shapes[lastIndex].SaveIndex = index;
@@ -216,7 +173,6 @@ public class Game : PersistableObject
 
         for(int i = 0; i < shapes.Count; ++i)
         {
-            //shapeFactory.Reclaim(shapes[i]);
             shapes[i].Recycle();
         }
         shapes.Clear();
@@ -282,7 +238,6 @@ public class Game : PersistableObject
             destructionProgress = reader.ReadFloat();
         }
 
-        //StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReadInt()));
         yield return LoadLevel(version < 2 ? 1 : reader.ReadInt());
         if(version >= 3)
         {
@@ -296,7 +251,6 @@ public class Game : PersistableObject
             int materialId = version > 0 ? reader.ReadInt() : 0;
             Shape instance = shapeFactories[factoryId].Get(shapeId, materialId);
             instance.Load(reader);
-            //shapes.Add(instance);
         }
 
         for(int i = 0; i < shapes.Count; ++i)
@@ -305,14 +259,9 @@ public class Game : PersistableObject
         }
     }
 
-
     IEnumerator LoadLevel(int levelBuildIndex)
     {
         enabled = false;
-        //SceneManager.LoadScene("Level 1", LoadSceneMode.Additive);
-        //yield return null;
-        //异步加载
-        //yield return SceneManager.LoadSceneAsync("Level 1", LoadSceneMode.Additive);
 
         if(loadedLevelBuildIndex > 0)
         {

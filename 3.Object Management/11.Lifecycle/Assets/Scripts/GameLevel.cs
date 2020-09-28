@@ -19,15 +19,6 @@ public class GameLevel : PersistableObject
         get { return popularionLimit; }
     }
 
-    //public Vector3 SpawnPoint
-    //{
-    //    get { return spawnZone.SpawnPoint; }
-    //}
-
-    //public void ConfigureSpawn(Shape shape)
-    //{
-    //    spawnZone.ConfigureSpawn(shape);
-    //}
     public void SpawnShapes()
     {
         spawnZone.SpawnShapes();
@@ -42,11 +33,6 @@ public class GameLevel : PersistableObject
             persistableObjects = new PersistableObject[0];
         }
     }
-
-    //void Start()
-    //{
-    //    Game.Instance.SpawnZoneOfLevel = spawnZone;
-    //}
 
     public override void Save(GameDataWriter writer)
     {
