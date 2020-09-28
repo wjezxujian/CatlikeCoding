@@ -106,6 +106,21 @@ public class Shape : PersistableObject
         }
     }
 
+    public void Die()
+    {
+        Game.Instance.Kill(this);
+    }
+
+    public void MarkAsDying()
+    {
+        Game.Instance.MarkAsDying(this);
+    }
+
+    public bool IsMarkedAsDying
+    {
+        get { return Game.Instance.IsMarkedAsDying(this); }
+    }
+
     public void SetMaterial(Material material, int materialId)
     {
         MaterialId = materialId;

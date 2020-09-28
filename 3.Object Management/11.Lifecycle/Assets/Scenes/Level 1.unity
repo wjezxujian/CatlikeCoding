@@ -350,4 +350,14 @@ MonoBehaviour:
       orbitFrequency:
         min: 0.25
         max: 0.5
+    lifecycle:
+      growingDurection:
+        min: 1
+        max: 2
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   surfaceOnly: 0

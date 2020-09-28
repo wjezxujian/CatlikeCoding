@@ -505,6 +505,7 @@ MonoBehaviour:
   ressedOnLoad: 0
   creationSpeedSlider: {fileID: 47718629}
   destructionSpeedSlider: {fileID: 1215387401}
+  destroyDuration: 1
 --- !u!1 &715582953
 GameObject:
   m_ObjectHideFlags: 0

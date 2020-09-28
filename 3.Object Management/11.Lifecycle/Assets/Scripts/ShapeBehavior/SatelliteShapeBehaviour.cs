@@ -2,7 +2,6 @@
 
 public class SatelliteShapeBehaviour : ShapeBehaviour
 {
-    //Shape focalShape;
     ShapeInstance focalShape;
 
     float frequency;
