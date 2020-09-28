@@ -208,13 +208,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464232750}
-  m_LocalRotation: {x: -0.082163595, y: 0.01421262, z: 0.39682958, w: -0.914097}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 300, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 7.986, y: -365.284, z: -47.303}
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &822239006
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822239006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dfa2bd8df29fc459137e862cf0b7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popularionLimit: 100
   spawnZone: {fileID: 1057983032}
   persistableObjects: []
 --- !u!1 &1057983030
@@ -320,7 +321,7 @@ MonoBehaviour:
       max: 1
     color:
       hue:
-        min: 0.1
+        min: 0
         max: 1
       saturation:
         min: 0.5
@@ -331,17 +332,20 @@ MonoBehaviour:
     uniformColor: 0
     oscillationDirection: 2
     oscillationAmplitude:
-      min: 0.1
-      max: 1
+      min: 0
+      max: 0
     oscillationFrequency:
       min: 0.5
       max: 1
     satellite:
+      amount:
+        min: 0
+        max: 3
       relativeScale:
         min: 0.25
         max: 0.5
       orbitRaduis:
-        min: 10
+        min: 1
         max: 2
       orbitFrequency:
         min: 0.25

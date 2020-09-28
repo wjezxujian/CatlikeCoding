@@ -2,11 +2,14 @@
 
 public class SatelliteShapeBehaviour : ShapeBehaviour
 {
-    Shape focalShape;
+    //Shape focalShape;
+    ShapeInstance focalShape;
 
     float frequency;
 
     Vector3 cosOffset, sinOffset;
+
+    Vector3 previousPosition;
 
     public override ShapeBehaviourType BehaviourType 
     {
@@ -17,28 +20,55 @@ public class SatelliteShapeBehaviour : ShapeBehaviour
     {
         this.focalShape = focalShape;
         this.frequency = frequency;
-        cosOffset = Vector3.right;
-        sinOffset = Vector3.forward;
+        Vector3 orbitAxis = Random.onUnitSphere;
+        do
+        {
+            cosOffset = Vector3.Cross(orbitAxis, Random.onUnitSphere).normalized;
+        }
+        while (cosOffset.sqrMagnitude < 0.1f);
+        
+        sinOffset = Vector3.Cross(cosOffset, orbitAxis);
         cosOffset *= radius;
         sinOffset *= radius;
 
+        shape.AddBehaviour<RotationShapeBehaviour>().AngularVelocity = -360f * frequency * shape.transform.InverseTransformDirection(orbitAxis);
+
         GameUpdate(shape);
+        previousPosition = shape.transform.localPosition;
     }
 
-    public override void GameUpdate(Shape shape)
+    public override bool GameUpdate(Shape shape)
     {
-        float t = 2f * Mathf.PI * frequency * shape.Age;
-        shape.transform.localPosition = focalShape.transform.localPosition + cosOffset * Mathf.Cos(t) + sinOffset * Mathf.Sin(t);
+        if (focalShape.IsValid)
+        {
+            float t = 2f * Mathf.PI * frequency * shape.Age;
+            previousPosition = shape.transform.localPosition;
+            shape.transform.localPosition = focalShape.Shape.transform.localPosition + cosOffset * Mathf.Cos(t) + sinOffset * Mathf.Sin(t);
+
+            return true;
+        }
+
+        shape.AddBehaviour<MovementShapeBehaviour>().Velocity = (shape.transform.localPosition - previousPosition) / Time.deltaTime;
+
+        return false;
     }
 
     public override void Save(GameDataWriter writer)
     {
-
+        writer.Write(focalShape);
+        writer.Write(frequency);
+        writer.Write(cosOffset);
+        writer.Write(sinOffset);
+        writer.Write(previousPosition);
     }
 
     public override void Load(GameDataReader reader)
     {
-        
+        focalShape = reader.ReadShapeInstance();
+        frequency = reader.ReadFloat();
+        cosOffset = reader.ReadVector3();
+        sinOffset = reader.ReadVector3();
+        previousPosition = reader.ReadVector3();
     }
 
     public override void Recyle()
@@ -46,6 +76,11 @@ public class SatelliteShapeBehaviour : ShapeBehaviour
         ShapeBehaviourPool<SatelliteShapeBehaviour>.Reclaim(this);
     }
 
-    
+    public override void ResolveShapeInstances()
+    {
+        focalShape.Resolve();
+    }
+
+
 
 }

@@ -68,6 +68,10 @@ public class Shape : PersistableObject
 
     public float Age { get; private set; }
 
+    public int InstanceId { get; private set; }
+
+    public int SaveIndex { get; set; }
+
     private void Awake()
     {
         //meshRenderer = GetComponent<MeshRenderer>();
@@ -84,13 +88,18 @@ public class Shape : PersistableObject
 
         for(int i = 0; i < behaviourList.Count; ++i)
         {
-            behaviourList[i].GameUpdate(this);
+            if (!behaviourList[i].GameUpdate(this))
+            {
+                behaviourList[i].Recyle();
+                behaviourList.RemoveAt(i--);
+            }
         }
     }
 
     public void Recycle()
     {
         Age = 0f;
+        InstanceId += 1;
 
         for(int i = 0; i < behaviourList.Count; ++i)
         {
@@ -99,6 +108,14 @@ public class Shape : PersistableObject
         }
         behaviourList.Clear();
         OriginFactory.Reclaim(this);
+    }
+
+    public void ResolveShapeInstances()
+    {
+        for(int i = 0; i < behaviourList.Count; ++i)
+        {
+            behaviourList[i].ResolveShapeInstances();
+        }
     }
 
     public void SetMaterial(Material material, int materialId)

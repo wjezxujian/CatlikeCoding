@@ -37,6 +37,8 @@ public abstract class SpawnZone : PersistableObject
         [System.Serializable]
         public struct SatelliteConfiguration
         {
+            public IntRange amount;
+
             [FloatRangeSlider(0.1f, 1f)]
             public FloatRange relativeScale;
 
@@ -45,7 +47,7 @@ public abstract class SpawnZone : PersistableObject
             public FloatRange orbitFrequency;
         }
 
-        public SatelliteConfiguration satellite;
+        public SatelliteConfiguration satellite;     
     }
 
     [SerializeField]
@@ -104,7 +106,11 @@ public abstract class SpawnZone : PersistableObject
 
         SetupOscillation(shape);
 
-        CreateSatelliteFor(shape);
+        int satelliteCount = spawnConfig.satellite.amount.RandomValueInRange;
+        for (int i = 0; i < satelliteCount; ++i)
+        {
+            CreateSatelliteFor(shape);
+        }
 
         //return shape;
     }
@@ -121,7 +127,7 @@ public abstract class SpawnZone : PersistableObject
         //shape.AddBehaviour<MovementShapeBehaviour>().Velocity = Vector3.up;
         SetupColor(shape);
         shape.AddBehaviour<SatelliteShapeBehaviour>().Initialize(shape, focalShape, 
-            spawnConfig.satellite.orbitRaduis.RandomValueInRange, spawnConfig.satellite.orbitRaduis.RandomValueInRange);
+            spawnConfig.satellite.orbitRaduis.RandomValueInRange, spawnConfig.satellite.orbitFrequency.RandomValueInRange);
     }
 
     void SetupColor(Shape shape)

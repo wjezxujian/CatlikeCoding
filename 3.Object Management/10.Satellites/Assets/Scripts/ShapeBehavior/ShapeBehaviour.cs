@@ -5,7 +5,7 @@ public abstract class ShapeBehaviour
     : ScriptableObject
 #endif
 {
-    public abstract void GameUpdate(Shape shape);
+    public abstract bool GameUpdate(Shape shape);
 
     public abstract void Save(GameDataWriter writer);
 
@@ -14,6 +14,8 @@ public abstract class ShapeBehaviour
     public abstract ShapeBehaviourType BehaviourType { get; }
 
     public abstract void Recyle();
+
+    public virtual void ResolveShapeInstances() {}
 
 #if UNITY_EDITOR
     public bool IsReclaimed { get; set; }

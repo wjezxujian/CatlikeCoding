@@ -4,12 +4,20 @@ using UnityEngine;
 public class GameLevel : PersistableObject
 {
     [SerializeField]
+    int popularionLimit;
+
+    [SerializeField]
     SpawnZone spawnZone;
 
     [SerializeField]
     PersistableObject[] persistableObjects;
 
     public static GameLevel Current { get; private set; }
+
+    public int PopulationLimit
+    {
+        get { return popularionLimit; }
+    }
 
     //public Vector3 SpawnPoint
     //{
