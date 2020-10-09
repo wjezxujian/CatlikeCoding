@@ -1,7 +1,7 @@
 ﻿using UnityEditor.Build;
 using UnityEngine;
 
-public abstract class SpawnZone : PersistableObject
+public abstract class SpawnZone : GameLevelObject
 {
     [System.Serializable]
     public class SpawnConfguration
@@ -79,15 +79,32 @@ public abstract class SpawnZone : PersistableObject
         public LifecycleConfiguration lifecycle;
     }
 
+    [SerializeField, Range(0f, 50f)]
+    float spawnSpeed;
+
     [SerializeField]
     SpawnConfguration spawnConfig;
 
+    float spawnProgress;
+
     public virtual Vector3 SpawnPoint { get; }
+
+    //private void FixedUpdate()
+    public override void GameUpdate()
+    {
+        spawnProgress += Time.deltaTime * spawnSpeed;
+        while(spawnProgress >= 1f)
+        {
+            spawnProgress -= 1f;
+            SpawnShapes();
+        }
+    }
 
     public virtual void SpawnShapes()
     {
         int factoryIndex = Random.Range(0, spawnConfig.factories.Length);
         Shape shape = spawnConfig.factories[factoryIndex].GetRandom();
+        shape.gameObject.layer = gameObject.layer;
         Transform t = shape.transform;
         t.localPosition = SpawnPoint;
         t.localRotation = Random.rotation;
@@ -127,6 +144,7 @@ public abstract class SpawnZone : PersistableObject
     {
         int factoryIndex = Random.Range(0, spawnConfig.factories.Length);
         Shape shape = spawnConfig.factories[factoryIndex].GetRandom();
+        shape.gameObject.layer = gameObject.layer;
         Transform t = shape.transform;
         t.localRotation = Random.rotation;
         t.localScale = focalShape.transform.localScale * spawnConfig.satellite.relativeScale.RandomValueInRange;
@@ -205,5 +223,15 @@ public abstract class SpawnZone : PersistableObject
             default:
                 return transform.forward;
         }
-    }  
+    }
+
+    public override void Save(GameDataWriter writer)
+    {
+        writer.Write(spawnProgress);
+    }
+
+    public override void Load(GameDataReader reader)
+    {
+        spawnProgress = reader.ReadFloat();   
+    }
 }

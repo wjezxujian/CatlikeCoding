@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Game : PersistableObject
 {
-    const int saveVersion = 6;
+    const int saveVersion = 7;
 
     public static Game Instance { get; private set; }
 
@@ -134,6 +134,8 @@ public class Game : PersistableObject
         {
             shapes[i].GameUpdate();
         }
+
+        GameLevel.Current.GameUpdate();
 
         inGameUpdateLoop = false;
 

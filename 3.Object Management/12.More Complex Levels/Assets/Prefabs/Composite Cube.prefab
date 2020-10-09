@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1206685987053403157}
   - component: {fileID: 1206685987053403158}
   - component: {fileID: 1206685987053403159}
-  - component: {fileID: 1206685987053403156}
   m_Layer: 0
   m_Name: Cube YZ
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1206685987053403156
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206685987053403154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1206685987331413348
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +92,6 @@ GameObject:
   - component: {fileID: 1206685987331413351}
   - component: {fileID: 1206685987331413368}
   - component: {fileID: 1206685987331413369}
-  - component: {fileID: 1206685987331413350}
   m_Layer: 0
   m_Name: Cube XY
   m_TagString: Untagged
@@ -177,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1206685987331413350
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206685987331413348}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1206685987518735116
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +174,7 @@ GameObject:
   - component: {fileID: 1206685987518735105}
   - component: {fileID: 1206685987518735118}
   - component: {fileID: -8530360612986593347}
-  - component: {fileID: 1206685987518735119}
+  - component: {fileID: 4351984710479944}
   m_Layer: 0
   m_Name: Composite Cube
   m_TagString: Untagged
@@ -291,8 +263,8 @@ MonoBehaviour:
   - {fileID: 1206685987518735118}
   - {fileID: 1206685987331413369}
   - {fileID: 1206685987053403159}
---- !u!65 &1206685987518735119
-BoxCollider:
+--- !u!135 &4351984710479944
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -302,5 +274,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}

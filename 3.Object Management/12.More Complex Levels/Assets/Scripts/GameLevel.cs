@@ -1,7 +1,6 @@
-﻿using System.Globalization;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GameLevel : PersistableObject
+public partial class GameLevel : PersistableObject
 {
     [SerializeField]
     int popularionLimit;
@@ -9,8 +8,9 @@ public class GameLevel : PersistableObject
     [SerializeField]
     SpawnZone spawnZone;
 
+    [UnityEngine.Serialization.FormerlySerializedAs("persistableObjects")]
     [SerializeField]
-    PersistableObject[] persistableObjects;
+    GameLevelObject[] levelObjects;
 
     public static GameLevel Current { get; private set; }
 
@@ -28,18 +28,26 @@ public class GameLevel : PersistableObject
     {
         Current = this;
 
-        if(persistableObjects == null)
+        if(levelObjects == null)
         {
-            persistableObjects = new PersistableObject[0];
+            levelObjects = new GameLevelObject[0];
+        }
+    }
+
+    public void GameUpdate()
+    {
+        for (int i = 0; i < levelObjects.Length; ++i)
+        {
+            levelObjects[i].GameUpdate();
         }
     }
 
     public override void Save(GameDataWriter writer)
     {
-        writer.Write(persistableObjects.Length);
-        for(int i = 0; i < persistableObjects.Length; ++i)
+        writer.Write(levelObjects.Length);
+        for(int i = 0; i < levelObjects.Length; ++i)
         {
-            persistableObjects[i].Save(writer);
+            levelObjects[i].Save(writer);
         }
     }
 
@@ -48,7 +56,8 @@ public class GameLevel : PersistableObject
         int saveCount = reader.ReadInt();
         for (int i = 0; i < saveCount; ++i)
         {
-            persistableObjects[i].Load(reader);
+            levelObjects[i].Load(reader);
         }
     }
+
 }

@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae87293481949ae4e9e42cd6c10a550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSpeed: 0
   spawnConfig:
     factories: []
     movementDirection: 0
@@ -288,6 +289,30 @@ MonoBehaviour:
     oscillationFrequency:
       min: 0
       max: 0
+    satellite:
+      amount:
+        min: 0
+        max: 0
+      relativeScale:
+        min: 0.1
+        max: 0.1
+      orbitRaduis:
+        min: 0
+        max: 0
+      orbitFrequency:
+        min: 0
+        max: 0
+      uniformLifecycles: 0
+    lifecycle:
+      growingDurection:
+        min: 0
+        max: 0
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   surfaceOnly: 0
 --- !u!1 &808379055
 GameObject:
@@ -318,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2d971816deba740a4dc5c5a04ad867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSpeed: 0
   spawnConfig:
     factories:
     - {fileID: 11400000, guid: a8fa0b5e75681a54c9547ff47f103ef2, type: 2}
@@ -350,6 +376,30 @@ MonoBehaviour:
     oscillationFrequency:
       min: 0
       max: 0
+    satellite:
+      amount:
+        min: 0
+        max: 0
+      relativeScale:
+        min: 0
+        max: 0
+      orbitRaduis:
+        min: 0
+        max: 0
+      orbitFrequency:
+        min: 0
+        max: 0
+      uniformLifecycles: 0
+    lifecycle:
+      growingDurection:
+        min: 0
+        max: 0
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   spawnZones:
   - {fileID: 859966367}
   - {fileID: 1979899677}
@@ -418,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSpeed: 0
   spawnConfig:
     factories: []
     movementDirection: 0
@@ -448,6 +499,30 @@ MonoBehaviour:
     oscillationFrequency:
       min: 0
       max: 0
+    satellite:
+      amount:
+        min: 0
+        max: 0
+      relativeScale:
+        min: 0.1
+        max: 0.1
+      orbitRaduis:
+        min: 0
+        max: 0
+      orbitFrequency:
+        min: 0
+        max: 0
+      uniformLifecycles: 0
+    lifecycle:
+      growingDurection:
+        min: 0
+        max: 0
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   surfaceOnly: 0
 --- !u!1 &1108161002
 GameObject:
@@ -478,9 +553,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dfa2bd8df29fc459137e862cf0b7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popularionLimit: 0
   spawnZone: {fileID: 808379056}
-  persistableObjects:
+  levelObjects:
   - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 808379056}
+  - {fileID: 859966367}
+  - {fileID: 1979899677}
+  - {fileID: 651125623}
+  - {fileID: 1286730252}
 --- !u!4 &1108161004
 Transform:
   m_ObjectHideFlags: 0
@@ -538,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae87293481949ae4e9e42cd6c10a550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSpeed: 0
   spawnConfig:
     factories: []
     movementDirection: 0
@@ -568,6 +659,30 @@ MonoBehaviour:
     oscillationFrequency:
       min: 0
       max: 0
+    satellite:
+      amount:
+        min: 0
+        max: 0
+      relativeScale:
+        min: 0.1
+        max: 0.1
+      orbitRaduis:
+        min: 0
+        max: 0
+      orbitFrequency:
+        min: 0
+        max: 0
+      uniformLifecycles: 0
+    lifecycle:
+      growingDurection:
+        min: 0
+        max: 0
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   surfaceOnly: 1
 --- !u!1 &1979899675
 GameObject:
@@ -612,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09584bc23fc6c34458caf0d423128249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSpeed: 0
   spawnConfig:
     factories: []
     movementDirection: 0
@@ -642,4 +758,28 @@ MonoBehaviour:
     oscillationFrequency:
       min: 0
       max: 0
+    satellite:
+      amount:
+        min: 0
+        max: 0
+      relativeScale:
+        min: 0.1
+        max: 0.1
+      orbitRaduis:
+        min: 0
+        max: 0
+      orbitFrequency:
+        min: 0
+        max: 0
+      uniformLifecycles: 0
+    lifecycle:
+      growingDurection:
+        min: 0
+        max: 0
+      adultDuration:
+        min: 0
+        max: 0
+      dyingDurection:
+        min: 0
+        max: 0
   surfaceOnly: 1

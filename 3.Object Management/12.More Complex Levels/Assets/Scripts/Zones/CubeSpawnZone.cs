@@ -31,3 +31,4 @@ public class CubeSpawnZone : SpawnZone
         Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 }
+    
