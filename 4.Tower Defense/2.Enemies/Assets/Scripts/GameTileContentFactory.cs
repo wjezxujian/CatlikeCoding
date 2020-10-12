@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu]
-public class GameTileContentFactory : ScriptableObject
+public class GameTileContentFactory : GameObjectFactory
 {
     [SerializeField]
     GameTileContent destinationPrefab = default;
@@ -14,7 +14,10 @@ public class GameTileContentFactory : ScriptableObject
     [SerializeField]
     GameTileContent wallPrefab = default;
 
-    Scene contentScene;
+    [SerializeField]
+    GameTileContent spawnPointPrefab = default;
+
+    //Scene contentScene;
 
     public GameTileContent Get(GameTileContentType type)
     {
@@ -26,6 +29,8 @@ public class GameTileContentFactory : ScriptableObject
                 return Get(emptyPrefab);
             case GameTileContentType.Wall:
                 return Get(wallPrefab);
+            case GameTileContentType.SpawnPoint:
+                return Get(spawnPointPrefab);
         }
 
         Debug.Assert(false, "Unsupported type: " + type);
@@ -40,32 +45,33 @@ public class GameTileContentFactory : ScriptableObject
 
     private GameTileContent Get(GameTileContent prefab)
     {
-        GameTileContent instance = Instantiate(prefab);
+        //GameTileContent instance = Instantiate(prefab);
+        GameTileContent instance = CreateGameObjectInstance(prefab);
         instance.OriginFactory = this;
-        MoveToFactoryScene(instance.gameObject);
+        //MoveToFactoryScene(instance.gameObject);
         return instance;
     }
 
-    private void MoveToFactoryScene(GameObject o)
-    {
-        if (!contentScene.isLoaded)
-        {
-            if (Application.isEditor)
-            {
-                contentScene = SceneManager.GetSceneByName(name);
-                if (!contentScene.isLoaded)
-                {
-                    contentScene = SceneManager.CreateScene(name);
-                }
-            }
-            else
-            {
-                contentScene = SceneManager.CreateScene(name);
-            }
-        }
+    //private void MoveToFactoryScene(GameObject o)
+    //{
+    //    if (!contentScene.isLoaded)
+    //    {
+    //        if (Application.isEditor)
+    //        {
+    //            contentScene = SceneManager.GetSceneByName(name);
+    //            if (!contentScene.isLoaded)
+    //            {
+    //                contentScene = SceneManager.CreateScene(name);
+    //            }
+    //        }
+    //        else
+    //        {
+    //            contentScene = SceneManager.CreateScene(name);
+    //        }
+    //    }
 
-        SceneManager.MoveGameObjectToScene(o, contentScene);
-    }
+    //    SceneManager.MoveGameObjectToScene(o, contentScene);
+    //}
 
 
 }
