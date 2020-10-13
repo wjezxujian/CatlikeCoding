@@ -1,63 +1,17 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Tower : GameTileContent
+public abstract class Tower : GameTileContent
 {
     [SerializeField, Range(1.5f, 10.5f)]
-    float targetingRange = 1.5f;
-
-    [SerializeField, Range(1f, 100f)]
-    float damagePerSecond = 10f;
-
-    [SerializeField]
-    Transform turret = default;
-
-    [SerializeField]
-    Transform laserBeam = default;
-    
-    Tower towerPrefab = default;
-
-    TargetPoint target;
-
-    Vector3 laserBeamScale;
+    protected float targetingRange = 1.5f;
 
     const int enemyLayerMask = 1 << 9;
 
     static Collider[] targetsBuffer = new Collider[100];
 
-    public override void GameUpdate()
-    {
-        if (TrackTarget() || AcquireTarget())
-        {
-            //Debug.Log("Searching for target...");
-            Shoot();
-        }
-        else
-        {
-            laserBeam.localScale = Vector3.zero;
-        }
-        
-    }
-
-    private void Shoot()
-    {
-        Vector3 point = target.Position;
-        turret.LookAt(point);
-        laserBeam.localRotation = turret.localRotation;
-
-        float d = Vector3.Distance(turret.position, point);
-        laserBeamScale.z = d;
-        laserBeam.localScale = laserBeamScale;
-        laserBeam.localPosition = turret.localPosition + 0.5f * d * laserBeam.forward;
-
-        target.Enemy.ApplyDamage(damagePerSecond * Time.deltaTime);
-    }
-
-    private void Awake()
-    {
-        laserBeamScale = laserBeam.localScale;
-    }
-
+    public abstract TowerType TowerType { get; }
+   
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
@@ -65,13 +19,13 @@ public class Tower : GameTileContent
         position.y += 0.1f;
         Gizmos.DrawWireSphere(position, targetingRange);
 
-        if(target != null)
-        {
-            Gizmos.DrawLine(position, target.Position);
-        }
+        //if(target != null)
+        //{
+        //    Gizmos.DrawLine(position, target.Position);
+        //}
     }
 
-    private bool AcquireTarget()
+    protected bool AcquireTarget(ref TargetPoint target)
     {
         //Collider[] targets = Physics.OverlapSphere(transform.localPosition, targetingRange, enemyLayerMask);
         Vector3 a = transform.localPosition;
@@ -93,7 +47,7 @@ public class Tower : GameTileContent
         return false;
     }
 
-    private bool TrackTarget()
+    protected bool TrackTarget(ref TargetPoint target)
     {
         if(target == null)
         {
