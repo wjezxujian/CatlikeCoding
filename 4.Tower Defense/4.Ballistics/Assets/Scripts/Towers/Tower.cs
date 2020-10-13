@@ -11,7 +11,7 @@ public abstract class Tower : GameTileContent
     static Collider[] targetsBuffer = new Collider[100];
 
     public abstract TowerType TowerType { get; }
-   
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
