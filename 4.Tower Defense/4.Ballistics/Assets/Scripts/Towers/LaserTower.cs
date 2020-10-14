@@ -26,7 +26,7 @@ public class LaserTower : Tower
 
     public override void GameUpdate()
     {
-        if (TrackTarget(ref target) || AcquireTarget(ref target))
+        if (TrackTarget(ref target) || AcquireTarget(out target))
         {
             //Debug.Log("Searching for target...");
             Shoot();

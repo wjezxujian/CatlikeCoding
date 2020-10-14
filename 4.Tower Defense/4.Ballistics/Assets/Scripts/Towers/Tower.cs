@@ -6,9 +6,9 @@ public abstract class Tower : GameTileContent
     [SerializeField, Range(1.5f, 10.5f)]
     protected float targetingRange = 1.5f;
 
-    const int enemyLayerMask = 1 << 9;
+    //const int enemyLayerMask = 1 << 9;
 
-    static Collider[] targetsBuffer = new Collider[100];
+    //static Collider[] targetsBuffer = new Collider[100];
 
     public abstract TowerType TowerType { get; }
 
@@ -25,21 +25,26 @@ public abstract class Tower : GameTileContent
         //}
     }
 
-    protected bool AcquireTarget(ref TargetPoint target)
+    protected bool AcquireTarget(out TargetPoint target)
     {
-        //Collider[] targets = Physics.OverlapSphere(transform.localPosition, targetingRange, enemyLayerMask);
-        Vector3 a = transform.localPosition;
-        Vector3 b = a;
-        b.y += 2f;
-        //Collider[] targets = Physics.OverlapCapsule(a, b, targetingRange, enemyLayerMask);
-        int hits = Physics.OverlapCapsuleNonAlloc(a, b, targetingRange, targetsBuffer, enemyLayerMask);
+        ////Collider[] targets = Physics.OverlapSphere(transform.localPosition, targetingRange, enemyLayerMask);
+        //Vector3 a = transform.localPosition;
+        //Vector3 b = a;
+        //b.y += 2f;
+        ////Collider[] targets = Physics.OverlapCapsule(a, b, targetingRange, enemyLayerMask);
+        //int hits = Physics.OverlapCapsuleNonAlloc(a, b, targetingRange, targetsBuffer, enemyLayerMask);
 
-        //if(targets.Length > 0)
-        if(hits > 0)
+        ////if(targets.Length > 0)
+        //if(hits > 0)
+        //{
+        //    //target = targets[0].GetComponent<TargetPoint>();
+        //    target = targetsBuffer[Random.Range(0, hits)].GetComponent<TargetPoint>();
+        //    Debug.Assert(target != null, "Targeted non-enemy!", targetsBuffer[0]);
+        //    return true;
+        //}
+        if(TargetPoint.FillBuffer(transform.localPosition, targetingRange))
         {
-            //target = targets[0].GetComponent<TargetPoint>();
-            target = targetsBuffer[Random.Range(0, hits)].GetComponent<TargetPoint>();
-            Debug.Assert(target != null, "Targeted non-enemy!", targetsBuffer[0]);
+            target = TargetPoint.RandomBuffered;
             return true;
         }
 
