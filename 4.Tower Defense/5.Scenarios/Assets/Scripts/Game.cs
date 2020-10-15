@@ -12,16 +12,16 @@ public class Game : MonoBehaviour
     [SerializeField]
     GameTileContentFactory tileContentFactory = default;
 
-    [SerializeField]
-    EnemyFactory enemyFactory = default;
+    //[SerializeField]
+    //EnemyFactory enemyFactory = default;
 
     [SerializeField]
     WarFactory warFactory = default;
 
-    [SerializeField, Range(0.1f, 10f)]
-    float spawnSpeed = 1f;
+    //[SerializeField, Range(0.1f, 10f)]
+    //float spawnSpeed = 1f;
 
-    float spawnProgress;
+    //float spawnProgress;
 
     GameBehaviourCollection enemies = new GameBehaviourCollection();
 
@@ -74,12 +74,12 @@ public class Game : MonoBehaviour
         }
 
 
-        spawnProgress += spawnSpeed * Time.deltaTime;
-        while(spawnProgress >= 1f)
-        {
-            spawnProgress -= 1f;
-            SpawnEnemy();
-        }
+        //spawnProgress += spawnSpeed * Time.deltaTime;
+        //while(spawnProgress >= 1f)
+        //{
+        //    spawnProgress -= 1f;
+        //    SpawnEnemy();
+        //}
 
         enemies.GameUpdate();
         Physics.SyncTransforms();
@@ -137,9 +137,9 @@ public class Game : MonoBehaviour
         //GameTile spawnPoint = board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
         //Enemy enemy = enemyFactory.Get((EnemyType)Random.Range(0, 3));
         GameTile spawnPoint = instance.board.GetSpawnPoint(Random.Range(0, instance.board.SpawnPointCount));
+        Enemy enemy = facotry.Get(type);
         enemy.SpawnOn(spawnPoint);
-
-        enemies.Add(enemy);
+        instance.enemies.Add(enemy);
     }
 
     public static Shell SpawnShell()

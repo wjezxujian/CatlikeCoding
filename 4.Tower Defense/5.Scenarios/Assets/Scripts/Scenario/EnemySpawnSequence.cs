@@ -43,6 +43,8 @@ public class EnemySpawnSequence
                 {
                     return cooldown;
                 }
+
+                Game.SpawnEnemy(sequence.factory, sequence.type);
                 count += 1;
             }
 
