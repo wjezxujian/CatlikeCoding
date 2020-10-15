@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f708b6b351e952438dde45807f4dd36, type: 3}
   m_Name: Cube SML Wave
   m_EditorClassIdentifier: 
-  sapwnSequences:
+  spawnSequences:
   - factory: {fileID: 11400000, guid: 560b5436ee42a06418c17ea171b96355, type: 2}
     type: 0
     amount: 10

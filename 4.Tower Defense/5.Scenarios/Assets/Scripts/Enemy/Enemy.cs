@@ -67,7 +67,8 @@ public class Enemy : GameBehaviour
     {
         if(Health < 0f)
         {
-            OriginFactory.Reclaim(this);
+            //OriginFactory.Reclaim(this);
+            Recycle();
             return false;
         }
 
@@ -79,7 +80,9 @@ public class Enemy : GameBehaviour
             //tileTo = tileTo.NextTileOnPath;
             if (tileTo == null)
             {
-                OriginFactory.Reclaim(this);
+                //OriginFactory.Reclaim(this);
+                Game.EnemyReachedDestination();
+                Recycle();
                 return false;
             }
             //positionFrom = positionTo;
@@ -103,6 +106,11 @@ public class Enemy : GameBehaviour
         }
 
         return true;
+    }
+
+    public override void Recycle()
+    {
+        OriginFactory.Reclaim(this);
     }
 
     public void ApplyDamage(float damage)

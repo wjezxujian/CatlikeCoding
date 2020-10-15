@@ -21,6 +21,17 @@ public class Game : MonoBehaviour
     //[SerializeField, Range(0.1f, 10f)]
     //float spawnSpeed = 1f;
 
+    [SerializeField]
+    GameScenario scenario = default;
+
+    [SerializeField, Range(0, 100)]
+    int startingPlayerHealth = 10;
+
+    [SerializeField, Range(1f, 100f)]
+    float playSpeed = 1f;
+
+    GameScenario.State activeScenario;
+
     //float spawnProgress;
 
     GameBehaviourCollection enemies = new GameBehaviourCollection();
@@ -31,12 +42,18 @@ public class Game : MonoBehaviour
 
     static Game instance;
 
+    int playerHealth;
+
+    const float pausedTimeScale = 0f;
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     private void Awake()
     {
+        playerHealth = startingPlayerHealth;
         board.Initialize(boardSize, tileContentFactory);
         board.ShowGrid = true;
+        activeScenario = scenario.Begin();
     }
 
     private void OnEnable()
@@ -73,6 +90,20 @@ public class Game : MonoBehaviour
             selectedTowerType = TowerType.Mortar;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space");
+            Time.timeScale = Time.timeScale > pausedTimeScale ? pausedTimeScale : playSpeed;
+        }
+        else if(Time.timeScale > pausedTimeScale)
+        {
+            Time.timeScale = playSpeed;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            BeginNewGame();
+        }
 
         //spawnProgress += spawnSpeed * Time.deltaTime;
         //while(spawnProgress >= 1f)
@@ -81,10 +112,34 @@ public class Game : MonoBehaviour
         //    SpawnEnemy();
         //}
 
+        if(playerHealth <= 0 && startingPlayerHealth > 0)
+        {
+            Debug.Log("Defeat!");
+            BeginNewGame();
+        }
+
+        if (!activeScenario.Progress() && enemies.IsEmpty)
+        {
+            Debug.Log("Victory!");
+            BeginNewGame();
+            activeScenario.Progress();
+        }
+
+        //activeScenario.Progress();
+
         enemies.GameUpdate();
         Physics.SyncTransforms();
         board.GameUpdate();
         nonEnemies.GameUpdate();
+    }
+
+    private void BeginNewGame()
+    {
+        playerHealth = startingPlayerHealth;
+        enemies.Clear();
+        nonEnemies.Clear();
+        board.Clear();
+        activeScenario = scenario.Begin();
     }
 
     private void OnValidate()
@@ -154,6 +209,11 @@ public class Game : MonoBehaviour
         Explosion explosion = instance.warFactory.Explosion;
         instance.nonEnemies.Add(explosion);
         return explosion;
+    }
+
+    public static void EnemyReachedDestination()
+    {
+        instance.playerHealth -= 1;
     }
     
 }

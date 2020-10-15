@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f708b6b351e952438dde45807f4dd36, type: 3}
   m_Name: Sphere SML Wave
   m_EditorClassIdentifier: 
-  sapwnSequences:
+  spawnSequences:
   - factory: {fileID: 11400000, guid: 36f7c4a1759ea254db822868ee0ac197, type: 2}
     type: 0
     amount: 10

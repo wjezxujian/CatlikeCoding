@@ -14,7 +14,7 @@ public class WarEntity : GameBehaviour
         }
     }
 
-    public void Recyle()
+    public override void Recycle()
     {
         originFactory.Reclaim(this);
     }
