@@ -475,6 +475,8 @@ MonoBehaviour:
   tileContentFactory: {fileID: 11400000, guid: 954fd51570c7ee14da184a43ff4a5e9d, type: 2}
   warFactory: {fileID: 11400000, guid: 29e956bf0e22134468fa22fb3660c1fd, type: 2}
   scenario: {fileID: 11400000, guid: 7f8c7945c9a069b49a49526d21aa7a7f, type: 2}
+  startingPlayerHealth: 100
+  playSpeed: 1
 --- !u!4 &1386462080
 Transform:
   m_ObjectHideFlags: 0

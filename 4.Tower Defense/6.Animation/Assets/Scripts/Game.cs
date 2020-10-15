@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using UnityEditor;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -112,9 +113,10 @@ public class Game : MonoBehaviour
         //    SpawnEnemy();
         //}
 
-        if(playerHealth <= 0 && startingPlayerHealth > 0)
+        if (playerHealth <= 0 && startingPlayerHealth > 0)
         {
             Debug.Log("Defeat!");
+            //EditorApplication.isPaused = true;
             BeginNewGame();
         }
 
