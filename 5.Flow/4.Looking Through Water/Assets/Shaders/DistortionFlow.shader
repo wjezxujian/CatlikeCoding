@@ -15,30 +15,39 @@
         _FlowOffset("Flow Offset", Float) = 0
         _HeightScale("Height Scale, Constant", Float) = 0.25
         _HeightScaleModulated("Height Scale, Modulated", Float) = 0.75
+        _WaterFogColor ("Water Fog Color", Color) = (0, 0, 0, 0)
+        _WaterFogDensity ("Water Fog Density", Range(0, 1)) = 0.5
+        _RefractionStrength ("Refraction Strength", Range(0, 1)) = 0.05
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        // Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 200
+
+        GrabPass { "_WaterBackground" }
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows
+        // #pragma surface surf Standard alpha fullforwardshadows
+        #pragma surface surf Standard alpha finalcolor:ResetAlpha
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
 
         #include "Flow.cginc"
+        #include "LookingThroughWater.cginc"
 
         sampler2D _MainTex, _FlowMap, _Normap, _DerivHeightMap;
         float _UJump, _VJump, _Tiling, _Speed, _FlowStrength, _FlowOffset;
         float _HeightScale, _HeightScaleModulated;
-
+        
         struct Input
         {
             float2 uv_MainTex;
+            float4 screenPos;
         };
 
         half _Glossiness;
@@ -57,6 +66,11 @@
             float3 dh = textureData.agb;
             dh.xy = dh.xy * 2 - 1;
             return dh;
+        }
+
+        void ResetAlpha(Input IN,   SurfaceOutputStandard o, inout fixed4 color)
+        {
+            color.a = 1;
         }
 
         void surf (Input IN, inout SurfaceOutputStandard o)
@@ -98,8 +112,12 @@
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
+
+            // o.Albedo = ColorBelowWater(IN.screenPos);
+            o.Emission = ColorBelowWater(IN.screenPos, o.Normal) * (1 - c.a);
+            // o.Alpha = 1;
         }
         ENDCG
     }
-    FallBack "Diffuse"
+    // FallBack "Diffuse"
 }

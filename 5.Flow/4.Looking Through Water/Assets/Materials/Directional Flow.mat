@@ -76,6 +76,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RefractionStrength: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0.5
@@ -83,8 +84,10 @@ Material:
     - _Tiling: 1
     - _TilingModulated: 50
     - _UVSec: 0
+    - _WaterFogDensity: 0.1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.30588228, g: 0.5137253, b: 0.6627451, a: 0.5176471}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WaterFogColor: {r: 0.30588233, g: 0.5137254, b: 0.6627451, a: 1}
   m_BuildTextureStacks: []
