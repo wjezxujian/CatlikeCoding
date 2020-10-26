@@ -52,8 +52,8 @@ public class CubeSphere : MonoBehaviour
     private void CreateVertices()
     {
         int cornerVertices = 8;
-        int edgeVertices = (gridSize * 3 - 3) * 4;
-        int faceVertices = ((gridSize - 1) * (gridSize - 1)  * 4;
+        int edgeVertices = (3 * gridSize  - 3) * 4;
+        int faceVertices = (gridSize - 1) * (gridSize - 1)  * 6;
         vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
         normals = new Vector3[vertices.Length];
         cubeUV = new Color32[vertices.Length];
@@ -240,17 +240,17 @@ public class CubeSphere : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (vertices == null)
-        {
-            return;
-        }
+        //if (vertices == null)
+        //{
+        //    return;
+        //}
 
-        for (int i = 0; i < vertices.Length; ++i)
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawSphere(vertices[i], 0.1f);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawRay(vertices[i], normals[i]);
-        }
+        //for (int i = 0; i < vertices.Length; ++i)
+        //{
+        //    Gizmos.color = Color.black;
+        //    Gizmos.DrawSphere(vertices[i], 0.1f);
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawRay(vertices[i], normals[i]);
+        //}
     }
 }
