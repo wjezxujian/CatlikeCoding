@@ -13,9 +13,10 @@ public partial class CameraRenderer
 
     CullingResults cullingResults;
 
-    static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
+    static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit"),
+                       litShaderTagId = new ShaderTagId("CustomLit");
 
-   
+    Lighting lighting = new Lighting();
 
     public void Render(ScriptableRenderContext context, Camera camera, bool useDynamicBatching, bool useGPUInstancing)
     {
@@ -30,6 +31,7 @@ public partial class CameraRenderer
         }
 
         Setup();
+        lighting.Setup(context);
         DrawVisibleGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportedShaders();
         DrawGizmos();
@@ -39,19 +41,20 @@ public partial class CameraRenderer
     private void DrawVisibleGeometry(bool useDynamicBatching, bool useGPUInstancing)
     {
         SortingSettings sortingSettings = new SortingSettings(camera) { criteria = SortingCriteria.CommonOpaque};
-        DrawingSettings drawingSettrings = new DrawingSettings(unlitShaderTagId, sortingSettings) {
+        DrawingSettings drawingSettings = new DrawingSettings(unlitShaderTagId, sortingSettings) {
             enableDynamicBatching = useDynamicBatching,
             enableInstancing = useGPUInstancing
         };
+        drawingSettings.SetShaderPassName(1, litShaderTagId);
         FilteringSettings filteringSettings = new FilteringSettings(RenderQueueRange.opaque);
 
-        context.DrawRenderers(cullingResults, ref drawingSettrings, ref filteringSettings);
+        context.DrawRenderers(cullingResults, ref drawingSettings, ref filteringSettings);
         context.DrawSkybox(camera);
 
         sortingSettings.criteria = SortingCriteria.CommonTransparent;
-        drawingSettrings.sortingSettings = sortingSettings;
+        drawingSettings.sortingSettings = sortingSettings;
         filteringSettings.renderQueueRange = RenderQueueRange.transparent;
-        context.DrawRenderers(cullingResults, ref drawingSettrings, ref filteringSettings);
+        context.DrawRenderers(cullingResults, ref drawingSettings, ref filteringSettings);
     }
 
     private void Setup()
