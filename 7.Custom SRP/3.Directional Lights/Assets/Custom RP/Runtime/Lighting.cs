@@ -4,9 +4,9 @@ using UnityEngine.Rendering;
 
 public class Lighting
 {
-    const int maxDirLightCount = 4;
-
     const string bufferName = "Lighting";
+
+    const int maxDirLightCount = 4;
 
     //static int dirLightColorId = Shader.PropertyToID("_DirectionalLightColor"),
     //           dirLightDirectionId = Shader.PropertyToID("_DirectionalLightDirection");
