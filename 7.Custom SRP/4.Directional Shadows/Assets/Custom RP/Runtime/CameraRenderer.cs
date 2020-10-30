@@ -89,7 +89,7 @@ public partial class CameraRenderer
     {
         if(camera.TryGetCullingParameters(out ScriptableCullingParameters p))
         {
-            p.shadowDistance = maxShaowDistance;
+            p.shadowDistance = Mathf.Min(maxShaowDistance, camera.farClipPlane);
             cullingResults = context.Cull(ref p);
             return true;
         }
