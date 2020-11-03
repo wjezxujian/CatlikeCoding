@@ -8,6 +8,7 @@ Shader "Custom RP/Lit" {
 		_Metallic ("Metallic", Range(0, 1)) = 0
 		_Smoothness ("Smoothness", Range(0, 1)) = 0.5
 		[Toggle(_PREMULTIPLY_ALPHA)] _PremulAlpha("Premultiply Alpha", Float) = 0
+		[KeywordEnum(On, Clip, Dither, Off)] _Shadows("Shadows", Float) = 0
 
 		[Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend("Src Blend", Float) = 1
 		[Enum(UnityEngine.Rendering.BlendMode)] _DstBlend("Dst Blend", Float) = 0
@@ -28,6 +29,8 @@ Shader "Custom RP/Lit" {
 			#pragma target 3.5
 			#pragma shader_feature _CLIPPING
 			#pragma shader_feature _PREMULTIPLY_ALPHA
+			#pragma multi_compile _ _DIRECTIONAL_PCF3 _DIRECTIONAL_PCF5 _DIRECTIONAL_PCF7
+			#pragma multi_compile _ _CASCADE_BLEND_SOFT _CASCADE_BLEND_HARD
 			#pragma multi_compile_instancing
 			#pragma vertex LitPassVertex
 			#pragma fragment LitPassFragment

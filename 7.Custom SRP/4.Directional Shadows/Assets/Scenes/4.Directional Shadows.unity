@@ -498,9 +498,9 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.6
+    m_NormalBias: 0.6
+    m_NearPlane: 10
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -19132,7 +19132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  cutoff: 0.5
+  cutoff: 0.08
   metallic: 0
   smoothness: 0.5
 --- !u!135 &2036625972
