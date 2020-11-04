@@ -70,6 +70,10 @@ float FilterDirectionalShadow(float3 positionSTS)
 
 float GetDirectionalShadowAttenuation(DirectionalShadowData directional, ShadowData globla, Surface surfaceWS)
 {
+#if !defined(_RECEIVE_SHADOWS)
+    return 1.0;
+#endif
+
     if(directional.strength <= 0.0)
     {
         return 1.0;
@@ -125,7 +129,6 @@ ShadowData GetShadowData(Surface surfaceWS)
     {
         data.strength = 0.0;
     }
-
 #if defined (_CASCADE_BLEND_DITHER)
     else if(data.cascadeBlend < surfaceWS.dither)
     {
