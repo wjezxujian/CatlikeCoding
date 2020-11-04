@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571397, b: 0.30692282, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.22571315, b: 0.30692175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -96,8 +96,9 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a7c9fa9399a80834d834a0b4ac675333, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -117,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -167,10 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6350386, g: 0.9716981, b: 0.59126914, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &13496618
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -198,6 +200,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -222,6 +226,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &13496620
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -277,10 +282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &56065060
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -308,6 +312,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -332,6 +338,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &56065062
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -387,10 +394,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6350386, g: 0.9716981, b: 0.59126914, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 1
   smoothness: 0.567
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &97062663
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -418,6 +424,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -442,6 +450,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &97062665
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -497,10 +506,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.66
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &124779633
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -528,6 +536,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -552,6 +562,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &124779635
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -607,6 +618,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 2
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -631,6 +644,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &129191227
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -719,10 +733,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.71
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &129332679
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -750,6 +763,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -774,6 +789,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &129332681
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -829,10 +845,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.794
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &144727105
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -860,6 +875,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -884,6 +901,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &144727107
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -939,10 +957,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &163520183
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -970,6 +987,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -994,6 +1013,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &163520185
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1049,10 +1069,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &183028446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1080,6 +1099,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1104,6 +1125,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &183028448
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1130,7 +1152,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &207770569
 MonoBehaviour:
@@ -1145,10 +1167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6650944, g: 1, b: 0.77302, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &207770570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1176,6 +1197,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1200,6 +1223,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &207770572
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1269,10 +1293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0.916
   smoothness: 0.803
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &278641536
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1300,6 +1323,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1324,6 +1349,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &278641538
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1379,10 +1405,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &293864719
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1410,6 +1435,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1434,6 +1461,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &293864721
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1474,7 +1502,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: 9ce407b9b7d2c47128e7fe8386a3b5ab, type: 2}
-  lightProbeVolume: {fileID: 331147508}
 --- !u!4 &331147507
 Transform:
   m_ObjectHideFlags: 0
@@ -1555,10 +1582,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &359132332
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1586,6 +1612,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1610,6 +1638,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &359132334
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1665,10 +1694,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &421942128
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1696,6 +1724,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1720,6 +1750,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &421942130
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1775,10 +1806,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &434618982
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1806,6 +1836,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1830,6 +1862,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &434618984
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1885,10 +1918,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 1
   smoothness: 0.282
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &435293670
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1916,6 +1948,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1940,6 +1974,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &435293672
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1995,10 +2030,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &447070330
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2026,6 +2060,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2050,6 +2086,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &447070332
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2091,10 +2128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.17412782, g: 0.30852887, b: 0.4056604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 2.670157, g: 0.5919687, b: 0.657252, a: 1}
 --- !u!65 &480932857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2122,6 +2158,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2146,6 +2184,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &480932859
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2215,10 +2254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 0.4669811, b: 0.8209311, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &489256475
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2246,6 +2284,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2270,6 +2310,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &489256477
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2296,7 +2337,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &498221825
 Transform:
@@ -2325,10 +2366,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 0.19712774, b: 0.16509432, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &498221827
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2356,6 +2396,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2380,6 +2422,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &498221829
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2435,10 +2478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &516283132
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2466,6 +2508,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2490,6 +2534,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &516283134
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2516,7 +2561,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &522747469
 MonoBehaviour:
@@ -2531,10 +2576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.68235296, g: 0.8450356, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &522747470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2562,6 +2606,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2586,6 +2632,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &522747472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2626,7 +2673,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &601399966
 MonoBehaviour:
@@ -2641,10 +2688,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7294118, g: 1, b: 0.83057296, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &601399967
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2672,6 +2718,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2696,6 +2744,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &601399969
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2765,10 +2814,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &611878011
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2796,6 +2844,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2820,6 +2870,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &611878013
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2846,7 +2897,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &655743968
 MonoBehaviour:
@@ -2861,10 +2912,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.8140866, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &655743969
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2892,6 +2942,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2916,6 +2968,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &655743971
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2985,10 +3038,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6350386, g: 0.9716981, b: 0.59126914, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.676
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &682462451
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3016,6 +3068,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3040,6 +3094,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &682462453
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3081,10 +3136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0, g: 0.14333944, b: 0.4509804, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0.07952699, g: 1.6877406, b: 0.35921508, a: 1}
 --- !u!65 &697529248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3112,6 +3166,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3136,6 +3192,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &697529250
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3183,8 +3240,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -3225,7 +3283,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -3296,10 +3354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0.756
   smoothness: 0.517
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &718353923
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3327,6 +3384,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3351,6 +3410,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &718353925
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3406,10 +3466,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.475
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.324
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &763286112
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3437,6 +3496,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3461,6 +3522,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &763286114
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3502,10 +3564,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.47066855, g: 0.115566045, b: 0.5, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 1.6210593, b: 2, a: 1}
 --- !u!65 &807289263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3533,6 +3594,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3557,6 +3620,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &807289265
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3626,10 +3690,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 0.18039216}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.651
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &807455511
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3657,6 +3720,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3681,6 +3746,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &807455513
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3736,10 +3802,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.651
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &818408674
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3767,6 +3832,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3791,6 +3858,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &818408676
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3817,7 +3885,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &850817438
 Transform:
@@ -3846,10 +3914,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6681648, g: 0.990566, b: 0.7839014, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &850817440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3877,6 +3944,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3901,6 +3970,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &850817442
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3956,10 +4026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &856509088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3987,6 +4056,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4011,6 +4082,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &856509090
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4066,10 +4138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.357
+  cutoff: 0.5
   metallic: 0.353
   smoothness: 0.609
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &859762737
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4097,6 +4168,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4121,6 +4194,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &859762739
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4176,10 +4250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.718
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &901141092
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4207,6 +4280,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4231,6 +4306,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &901141094
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4286,10 +4362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &904368223
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4317,6 +4392,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4341,6 +4418,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &904368225
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4367,7 +4445,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &912227125
 MonoBehaviour:
@@ -4382,10 +4460,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.79901075, g: 0.6666667, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &912227126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4413,6 +4490,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4437,6 +4516,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &912227128
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4477,7 +4557,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &913442891
 MonoBehaviour:
@@ -4492,10 +4572,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.73386407, g: 0.68235296, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &913442892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4523,6 +4602,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4547,6 +4628,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &913442894
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4616,10 +4698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.664
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &921198028
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4647,6 +4728,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4671,6 +4754,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &921198030
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4809,10 +4893,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &977074008
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4840,6 +4923,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4864,6 +4949,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &977074010
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4919,10 +5005,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.693
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1020299219
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4950,6 +5035,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4974,6 +5061,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1020299221
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5124,10 +5212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.4528302, g: 0, b: 0, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 2.670157, g: 2.4781315, b: 1.5240047, a: 1}
 --- !u!65 &1098207118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5155,6 +5242,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5179,6 +5268,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1098207120
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5248,10 +5338,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.735
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1117054698
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5279,6 +5368,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5303,6 +5394,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1117054700
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5418,10 +5510,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 1
   smoothness: 0.458
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1170426002
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5449,6 +5540,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5473,6 +5566,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1170426004
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5528,10 +5622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1180910134
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5559,6 +5652,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5583,6 +5678,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1180910136
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5638,6 +5734,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 2
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5662,6 +5760,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1205694582
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5750,10 +5849,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.433
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1231376838
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5781,6 +5879,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5805,6 +5905,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1231376840
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5860,10 +5961,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &1280365181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5891,6 +5991,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5915,6 +6017,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1280365183
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5970,10 +6073,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1335465613
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6001,6 +6103,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6025,6 +6129,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1335465615
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6080,10 +6185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.239
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1337068857
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6111,6 +6215,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6135,6 +6241,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1337068859
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6161,7 +6268,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1397499703
 Transform:
@@ -6190,10 +6297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 0.8205818, b: 0.6650944, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &1397499705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6221,6 +6327,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6245,6 +6353,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1397499707
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6300,10 +6409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6350386, g: 0.9716981, b: 0.59126914, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1403377215
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6331,6 +6439,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6355,6 +6465,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1403377217
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6381,7 +6492,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1414653307
 MonoBehaviour:
@@ -6396,10 +6507,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.84474796, g: 0.759434, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &1414653308
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6427,6 +6537,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6451,6 +6563,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1414653310
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6520,10 +6633,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1428339885
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6551,6 +6663,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6575,6 +6689,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1428339887
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6630,10 +6745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1467523221
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6661,6 +6775,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6685,6 +6801,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1467523223
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6740,10 +6857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1492045088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6771,6 +6887,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6795,6 +6913,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1492045090
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6850,10 +6969,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9020385, g: 1, b: 0.6556604, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1528906240
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6881,6 +6999,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6905,6 +7025,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1528906242
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6960,10 +7081,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1603599159
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6991,6 +7111,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7015,6 +7137,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1603599161
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7070,10 +7193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1609865732
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7101,6 +7223,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7125,6 +7249,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1609865734
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7180,10 +7305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 0.9019608}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.651
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1612007460
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7211,6 +7335,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7235,6 +7361,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1612007462
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7273,9 +7400,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1632775356
 MeshRenderer:
@@ -7291,6 +7418,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7315,6 +7444,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1632775357
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7350,10 +7480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.1477839, g: 0.764151, b: 0.15177192, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1645389705
 GameObject:
   m_ObjectHideFlags: 0
@@ -7401,10 +7530,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.71
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1645389708
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7432,6 +7560,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7456,6 +7586,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1645389710
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7511,10 +7642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.6509804}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.769
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1653347230
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7542,6 +7672,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7566,6 +7698,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1653347232
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7621,10 +7754,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1695304137
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7652,6 +7784,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7676,6 +7810,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1695304139
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7731,10 +7866,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1720865118
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7762,6 +7896,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7786,6 +7922,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1720865120
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7841,10 +7978,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9666375, g: 0.70554465, b: 0.990566, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.777
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1734926731
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7872,6 +8008,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7896,6 +8034,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1734926733
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7951,10 +8090,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.298
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.727
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1782004220
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7982,6 +8120,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8006,6 +8146,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1782004222
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8061,10 +8202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.7311321, g: 0.86053616, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1818151700
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8092,6 +8232,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8116,6 +8258,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1818151702
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8171,10 +8314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9216731, g: 1, b: 0.36320752, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.643
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1822808731
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8202,6 +8344,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8226,6 +8370,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1822808733
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8281,10 +8426,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 0.60784316}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.819
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1856745837
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8312,6 +8456,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8336,6 +8482,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1856745839
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8377,10 +8524,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.4528302, g: 0, b: 0, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 2, g: 1.654902, b: 0, a: 1}
 --- !u!65 &1857278379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8408,6 +8554,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8432,6 +8580,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1857278381
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8501,10 +8650,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &1886352575
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8532,6 +8680,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8556,6 +8706,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1886352577
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8789,10 +8940,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1933946947
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8820,6 +8970,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8844,6 +8996,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1933946949
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8899,10 +9052,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.6350386, g: 0.9716981, b: 0.59126914, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &1965230374
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8930,6 +9082,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8954,6 +9108,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1965230376
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8980,7 +9135,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &2035396379
 MonoBehaviour:
@@ -8995,10 +9150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 0.8254717, b: 0.8254717, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &2035396380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9026,6 +9180,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9050,6 +9206,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2035396382
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9119,10 +9276,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.72484267, g: 0.6367924, b: 1, a: 1}
-  alphaCutoff: 0.08
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &2036625972
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9150,6 +9306,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9174,6 +9332,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2036625974
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9229,10 +9388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.990566, g: 0.7477749, b: 0.6868548, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &2061920351
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9260,6 +9418,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9284,6 +9444,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2061920353
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9310,7 +9471,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2093693655
 Transform:
@@ -9339,10 +9500,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 0.9674019, g: 1, b: 0.25943398, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &2093693657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9370,6 +9530,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9394,6 +9556,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2093693659
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9449,10 +9612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.5
+  cutoff: 0.5
   metallic: 0
   smoothness: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &2120848151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9480,6 +9642,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9504,6 +9668,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2120848153
 MeshFilter:
   m_ObjectHideFlags: 0
