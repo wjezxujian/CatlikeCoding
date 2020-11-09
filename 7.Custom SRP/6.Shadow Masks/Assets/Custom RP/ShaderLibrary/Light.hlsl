@@ -18,7 +18,7 @@ struct Light
     float3 direction;
     float attenuation;
 };
-
+ 
 int GetDirectionalLightCount()
 {
     return _DirectionalLightCount;
@@ -27,9 +27,10 @@ int GetDirectionalLightCount()
 DirectionalShadowData GetDirectionalShadowData(int lightIndex, ShadowData shadowData)
 {
     DirectionalShadowData data;
-    data.strength = _DirectionalLightShadowData[lightIndex].x * shadowData.strength;
+    data.strength = _DirectionalLightShadowData[lightIndex].x;// * shadowData.strength;
     data.tileIndex = _DirectionalLightShadowData[lightIndex].y + shadowData.cascadeIndex;
     data.normalBias = _DirectionalLightShadowData[lightIndex].z;
+    data.shadowMaskChannel = _DirectionalLightShadowData[lightIndex].w;
     return data;
 }
 
