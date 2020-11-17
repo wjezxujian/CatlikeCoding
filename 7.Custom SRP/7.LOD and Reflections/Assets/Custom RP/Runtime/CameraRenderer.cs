@@ -49,7 +49,7 @@ public partial class CameraRenderer
         DrawingSettings drawingSettings = new DrawingSettings(unlitShaderTagId, sortingSettings) {
             enableDynamicBatching = useDynamicBatching,
             enableInstancing = useGPUInstancing,
-            perObjectData = PerObjectData.Lightmaps | PerObjectData.ShadowMask |
+            perObjectData = PerObjectData.ReflectionProbes | PerObjectData.Lightmaps | PerObjectData.ShadowMask |
             PerObjectData.LightProbe | PerObjectData.OcclusionProbe |
             PerObjectData.LightProbeProxyVolume | PerObjectData.OcclusionProbeProxyVolume
         };

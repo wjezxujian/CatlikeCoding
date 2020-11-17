@@ -28,7 +28,7 @@ public class Shadows
 
 	int shadowedDirectionalLightCount;
 
-	bool useShadowMask;
+	bool useShadowMask; 
 
 	static int dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas"),
 				dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices"),

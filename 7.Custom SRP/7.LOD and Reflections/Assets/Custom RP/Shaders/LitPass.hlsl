@@ -4,9 +4,9 @@
 // #include "../ShaderLibrary/Common.hlsl"
 #include "../ShaderLibrary/Surface.hlsl"
 #include "../ShaderLibrary/Shadows.hlsl"
-#include "../ShaderLibrary/GI.hlsl"
 #include "../ShaderLibrary/Light.hlsl"
 #include "../ShaderLibrary/BRDF.hlsl"
+#include "../ShaderLibrary/GI.hlsl"
 #include "../ShaderLibrary/Lighting.hlsl"
 
 // TEXTURE2D(_BaseMap);
@@ -61,10 +61,11 @@ Varyings LitPassVertex(Attributes input)
 float4 LitPassFragment(Varyings input) : SV_TARGET
 {
     UNITY_SETUP_INSTANCE_ID(input);
-#if defined(LOD_FADE_CROSSFADE)
-    return -unity_LODFade.x;
-#endif
-
+// #if defined(LOD_FADE_CROSSFADE)
+//     return -unity_LODFade.x;
+// #endif
+    ClipLOD(input.positionCS.xy, unity_LODFade.x);
+    
     // float4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.baseUV);
     // float4 baseColor = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseColor);
     // float4 base = baseMap * baseColor;
@@ -89,13 +90,14 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
     // surface.smoothness = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Smoothness);
     surface.metallic = GetMetallic(input.baseUV);
     surface.smoothness = GetSmoothness(input.baseUV);
+    surface.fresnelStrength = GetFresnel(input.baseUV);
     surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);
 #if defined(_PREMULTIPLY_ALPHA)
     BRDF brdf = GetBRDF(surface, true);
 #else
     BRDF brdf = GetBRDF(surface);
 #endif
-    GI gi = GetGI(GI_FRAGMENT_DATA(input), surface);
+    GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
     float3 color = GetLighting(surface, brdf, gi);
     color += GetEmission(input.baseUV);
     return float4(color, surface.alpha);
