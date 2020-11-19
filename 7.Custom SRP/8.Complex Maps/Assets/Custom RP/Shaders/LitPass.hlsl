@@ -1,28 +1,12 @@
 #ifndef CUSTOM_LIT_PASS_INCLUDED
 #define CUSTOM_LIT_PASS_INCLUDED
 
-// #include "../ShaderLibrary/Common.hlsl"
 #include "../ShaderLibrary/Surface.hlsl"
 #include "../ShaderLibrary/Shadows.hlsl"
 #include "../ShaderLibrary/Light.hlsl"
 #include "../ShaderLibrary/BRDF.hlsl"
 #include "../ShaderLibrary/GI.hlsl"
 #include "../ShaderLibrary/Lighting.hlsl"
-
-// TEXTURE2D(_BaseMap);
-// SAMPLER(sampler_BaseMap);
-
-// // CBUFFER_START(UnityPerMaterial)
-// //     float4 _BaseColor;
-// // CBUFFER_END
-// UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
-//     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseMap_ST)
-//     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
-//     UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)
-//     UNITY_DEFINE_INSTANCED_PROP(float, _Metallic)
-//     UNITY_DEFINE_INSTANCED_PROP(float, _Smoothness)
-// UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
-
 
 struct Attributes {
     float3 positionOS : POSITION;
@@ -41,7 +25,9 @@ struct Varyings {
     float4 tangentWS : VAR_TANAGENT;
 #endif
     float2 baseUV : VAR_BASE_UV;
+#if defined(_DETAIL_MAP)    
     float2 detailUV : VAR_DETAIL_UV;
+#endif
     GI_VARYINGS_DATA
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
@@ -62,7 +48,6 @@ Varyings LitPassVertex(Attributes input)
     // float4 baseST = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseMap_ST);
     // output.baseUV = input.baseUV * baseST.xy + baseST.zw;
     output.baseUV = TransformBaseUV(input.baseUV);
-    output.detailUV = 0.0;
 #if defined(_DETAIL_MAP)
     output.detailUV = TransformDetailUV(input.baseUV);
 #endif
@@ -84,7 +69,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 #if defined(_MASK_MAP)
     config.useMask = true;
 #endif
-#if defined(_DETAIL_MASK)
+#if defined(_DETAIL_MAP)
     config.detailUV = input.detailUV;
     config.useDetail = true;
 #endif

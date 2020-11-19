@@ -57,7 +57,7 @@ float2 TransformBaseUV(float2 baseUV)
 float2 TransformDetailUV(float2 detailUV)
 {
     float4 detailST = INPUT_PROP(_DetailMap_ST);
-    return detailUV = detailST.xy + detailST.zw;
+    return detailUV * detailST.xy + detailST.zw;
 }
 
 float4 GetMask(InputConfig c)
@@ -75,7 +75,7 @@ float4 GetDetail(InputConfig c)
     if(c.useDetail)
     {
         float4 map = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, c.detailUV);
-        return map * 2.0 - 1;    
+        return map * 2.0 - 1.0;    
     }
     return 0.0;   
 }
@@ -90,7 +90,8 @@ float4 GetBase(InputConfig c)
         float detail = GetDetail(c).r * INPUT_PROP(_DetailAlbedo);
         // map += detail;
         float mask = GetMask(c).b;
-        map.rgb = lerp(sqrt(map.rgb), detail < 0.0 ? 0.0 : 1.0, abs(detail) * mask);       
+        map.rgb = lerp(sqrt(map.rgb), detail < 0.0 ? 0.0 : 1.0, abs(detail) * mask);
+        map.rgb *= map.rgb;
     }
     
     return map * color;
