@@ -5,16 +5,6 @@
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonMaterial.hlsl"
 #include "UnityInput.hlsl"
 
-// float3 TransformObjectToWorld(float3 positionOS)
-// {
-//     return mul(unity_ObjectToWorld, float4(positionOS, 1.0)).xyz;
-// }
-
-// float4 TransformWorldToHClip(float3 positionWS)
-// {
-//     return mul(unity_MatrixVP, float4(positionWS, 1.0));
-// }
-
 #define UNITY_MATRIX_M unity_ObjectToWorld
 #define UNITY_MATRIX_I_M unity_WorldToObject
 #define UNITY_MATRIX_V unity_MatrixV
@@ -27,6 +17,7 @@
 
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl"
 
 float Square (float x)
 {
@@ -46,6 +37,21 @@ void ClipLOD(float2 positionCS, float fade)
 	// clip(fade - dither);
 	clip(fade + (fade < 0.0 ? dither : -dither));
 #endif
+}
+
+float3 DecodeNormal(float4 sample, float scale)
+{
+#if defined(UNITY_NO_DXT5nm)
+	return UnpackNormalRGB(sample, sacle);
+#else
+	return UnpackNormalmapRGorAG(sample, scale);
+#endif
+}
+
+float3 NormalTangentToWorld(float3 normalTS, float3 normalWS, float4 tangentWS)
+{
+	float3x3 tangentToWorld = CreateTangentToWorld(normalWS, tangentWS.xyz, tangentWS.w);
+	return TransformTangentToWorld(normalTS, tangentToWorld);
 }
 
 #endif
