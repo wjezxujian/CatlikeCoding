@@ -383,7 +383,7 @@ public class Shadows
 			viewMatrix.m12 = -viewMatrix.m12;
 			viewMatrix.m13 = -viewMatrix.m13;
 			shadowSettings.splitData = splitData;
-			int tileIndex = index + 1;
+			int tileIndex = index + i;
 			//float texelSize = 2f / (tileSize * projectionMatrix.m00);
 			//float filterSize = texelSize * ((float)this.shadowSettings.other.filter + 1f);
 			//float bias = light.normalBias * filterSize * 1.4142136f;
