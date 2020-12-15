@@ -161,7 +161,7 @@ float GetBakedShadow(ShadowMask mask, int channel)
         {
             shadow = mask.shadows[channel];
         }
-        shadow = mask.shadows.r;
+        // shadow = mask.shadows.r;
     }
 
     return shadow;
@@ -180,14 +180,14 @@ float GetBakedShadow(ShadowMask mask, int channel, float strength)
 float GetOtherShadow(OtherShadowData other, ShadowData global, Surface surfaceWS)
 {
     float tileIndex = other.tileIndex;
-    float lightPlane = other.spotDirectionWS;
+    float3 lightPlane = other.spotDirectionWS;
     if (other.isPoint)
     {
         float faceOffset = CubeMapFaceID(-other.lightDirectionWS);
         tileIndex += faceOffset;
         lightPlane = pointShadowPlanes[faceOffset];
     }
-    float4 tileData = _OtherShadowTiles[other.tileIndex];
+    float4 tileData = _OtherShadowTiles[tileIndex];
     float3 surfaceToLight = other.lightPositionWS - surfaceWS.position;
     float distanceToLightPlane = dot(surfaceToLight, lightPlane);
     float3 normalBias = surfaceWS.interpolatedNormal * (distanceToLightPlane * tileData.w);
@@ -256,7 +256,7 @@ float GetOtherShadowAttenuation(OtherShadowData other, ShadowData global, Surfac
     return shadow;
 }
 
-float FadeShadowStrength(float distance, float scale, float fade)
+float FadedShadowStrength(float distance, float scale, float fade)
 {
     return saturate((1.0 - distance * scale) * fade);
 }
@@ -268,7 +268,7 @@ ShadowData GetShadowData(Surface surfaceWS)
     data.shadowMask.distance = false;
     data.shadowMask.shadows = 1.0;
     data.cascadeBlend = 1.0;
-    data.strength = FadeShadowStrength(surfaceWS.depth, _ShadowDistanceFade.x, _ShadowDistanceFade.y);
+    data.strength = FadedShadowStrength(surfaceWS.depth, _ShadowDistanceFade.x, _ShadowDistanceFade.y);
 
     int i;
 	for (i = 0; i < _CascadeCount; i++) 
@@ -277,7 +277,7 @@ ShadowData GetShadowData(Surface surfaceWS)
 		float distanceSqr = DistanceSquared(surfaceWS.position, sphere.xyz);
 		if (distanceSqr < sphere.w) 
         {
-            float fade = FadeShadowStrength(distanceSqr, _CascadeData[i].x, _ShadowDistanceFade.z);
+            float fade = FadedShadowStrength(distanceSqr, _CascadeData[i].x, _ShadowDistanceFade.z);
             if (i == _CascadeCount - 1)
             {
                 data.strength *= fade;
