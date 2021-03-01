@@ -26,6 +26,9 @@ public class PostFXSettings : ScriptableObject
     [System.Serializable]
     public struct BloomSettings
     {
+        public enum Mode { Additive, Scattering }
+
+
         [Range(0f, 16f)]
         public int maxIterations;
 
@@ -42,10 +45,20 @@ public class PostFXSettings : ScriptableObject
 
         [Min(0f)]
         public float intensity;
+
+        public bool fadeFireflies;
+
+        public Mode mode;
+
+        [Range(0.05f, 0.95f)]
+        public float scatter;
     }
 
     [SerializeField]
-    BloomSettings bloom = default;
+    BloomSettings bloom = new BloomSettings {
+        scatter = 0.7f
+    };
+
 
     public BloomSettings Bloom => bloom;
 }
