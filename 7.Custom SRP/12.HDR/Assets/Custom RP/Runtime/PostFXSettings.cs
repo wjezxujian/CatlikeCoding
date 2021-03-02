@@ -54,11 +54,23 @@ public class PostFXSettings : ScriptableObject
         public float scatter;
     }
 
+    [System.Serializable]
+    public struct ToneMappingSettings
+    {
+        public enum Mode { None = -1, ACES, Neutral, Reinhard }
+
+        public Mode mode;
+    }
+
     [SerializeField]
     BloomSettings bloom = new BloomSettings {
         scatter = 0.7f
     };
 
+    [SerializeField]
+    ToneMappingSettings toneMapping = default;
 
     public BloomSettings Bloom => bloom;
+
+    public ToneMappingSettings ToneMapping => toneMapping;
 }
