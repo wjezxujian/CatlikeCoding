@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 [CreateAssetMenu(menuName = "Rendering/Custom Render Pipeline")]
 public class CustomRenderPipelineAsset : RenderPipelineAsset
 {
-    public enum ColorLUTResolution { _16 = 16, _32 = 32, _64 = 64}
+    public enum ColorLUTResolution { _16 = 16, _32 = 32, _64 = 64 }
 
     [SerializeField]
     bool allowHDR = true;
