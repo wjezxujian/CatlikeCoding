@@ -257,7 +257,9 @@ public class Shadows
 	private void RenderDirectionalShadows(int index, int split, int tileSize)
     {
 		ShadowedDirectionalLight light = shadowedDirectionalLights[index];
-		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
+		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex) {
+			useRenderingLayerMaskTest = true
+		};
 
 		int cascadeCount = this.shadowSettings.directional.cascadeCount;
 		int tileOffset = index * cascadeCount;
@@ -344,7 +346,10 @@ public class Shadows
 	private void RenderSpotShadows(int index, int split, int tileSize)
 	{
 		ShadowedOtherLight light = shadowedOtherLights[index];
-		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
+		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex)
+		{
+			useRenderingLayerMaskTest = true
+		};
 
 		cullingResults.ComputeSpotShadowMatricesAndCullingPrimitives(
 			light.visibleLightIndex, out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix, out ShadowSplitData splitData);
@@ -366,7 +371,10 @@ public class Shadows
 	private void RenderPointShadows(int index, int split, int tileSize)
 	{
 		ShadowedOtherLight light = shadowedOtherLights[index];
-		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
+		ShadowDrawingSettings shadowSettings = new ShadowDrawingSettings(cullingResults, light.visibleLightIndex)
+		{
+			useRenderingLayerMaskTest = true
+		};
 
 		float texelSize = 2f / tileSize;
 		float filterSize = texelSize * ((float)this.shadowSettings.other.filter + 1f);

@@ -93,6 +93,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
     surface.interpolatedNormal = surface.normal;
     surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
     surface.depth = -TransformWorldToView(input.positionWS).z;
+    surface.renderingLayerMask = asuint(unity_RenderingLayer.x);
     surface.color = base.rgb;
     surface.alpha = base.a;
     // surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
@@ -110,7 +111,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
     GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
     float3 color = GetLighting(surface, brdf, gi);
     color += GetEmission(config);
-    return float4(color, surface.alpha);
+    return float4(color, GetFinalAlpha(surface.alpha));
 }
 
 #endif
