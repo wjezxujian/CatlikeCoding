@@ -9657,7 +9657,7 @@ MonoBehaviour:
     renderingLayerMask: -1
     maskLights: 0
     overridePostFX: 0
-    postFXSettings: {fileID: 0}
+    postFXSettings: {fileID: 11400000, guid: c5a268fdfe4e14ffd9efb94a8709e4f6, type: 2}
     finalBlendMode:
       source: 1
       destination: 0
