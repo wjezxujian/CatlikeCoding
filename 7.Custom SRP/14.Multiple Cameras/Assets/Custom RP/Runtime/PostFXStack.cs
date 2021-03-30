@@ -54,7 +54,7 @@ public partial class PostFXStack
         smhRangeId = Shader.PropertyToID("_SMHRange"),
         colorGradingLUTId = Shader.PropertyToID("_ColorGradingLUT"),
         colorGradingLUTParametersId = Shader.PropertyToID("_ColorGradingLUTParameters"),
-        colorGradingLUTInLogCId = Shader.PropertyToID("_ColorGradingLUTInLogC"),
+        colorGradingLUTInLogId = Shader.PropertyToID("_ColorGradingLUTInLogC"),
         finalSrcBlendId = Shader.PropertyToID("_FinalSrcBlend"),
         finalDstBlendId = Shader.PropertyToID("_FinalDstBlend");
 
@@ -239,6 +239,7 @@ public partial class PostFXStack
     }
 
     void DoColorGradingAddToneMapping(int sourceId)
+
     {
         ConfigureColorAdjustments();
         ConfigureWhiteBalance();
@@ -253,7 +254,7 @@ public partial class PostFXStack
 
         ToneMappingSettings.Mode mode = settings.ToneMapping.mode;
         Pass pass = Pass.ColorGradingNone + (int)mode;
-        buffer.SetGlobalFloat(colorGradingLUTInLogCId, useHDR && pass != Pass.ColorGradingNone ? 1f : 0f);
+        buffer.SetGlobalFloat(colorGradingLUTInLogId, useHDR && pass != Pass.ColorGradingNone ? 1f : 0f);
         Draw(sourceId, colorGradingLUTId, pass);
 
         buffer.SetGlobalVector(colorGradingLUTParametersId, new Vector4(1f / lutWidth, 1f / lutHeight, lutHeight - 1f));
@@ -290,7 +291,7 @@ public partial class PostFXStack
         buffer.SetGlobalColor(smhShadowsId, smh.shadows.linear);
         buffer.SetGlobalColor(smhMidtonesId, smh.midtones.linear);
         buffer.SetGlobalColor(smhHighlightsId, smh.highlights.linear);
-        buffer.SetGlobalVector(smhRangeId, new Vector4(smh.shadowsStart, smh.shadowsEnd, smh.hightlightsStart, smh.hightLightsEnd));
+        buffer.SetGlobalVector(smhRangeId, new Vector4(smh.shadowsStart, smh.shadowsEnd, smh.highlightsStart, smh.highLightsEnd));
     }
 
 }

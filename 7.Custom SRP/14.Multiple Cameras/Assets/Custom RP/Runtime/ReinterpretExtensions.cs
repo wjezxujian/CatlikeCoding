@@ -12,7 +12,7 @@ public static class ReinterpretExtensions
         public float floatValue;
     }
 
-    public static float ReinterpreAsFloat(this int value)
+    public static float ReinterpretAsFloat(this int value)
     {
         IntFloat converter = default;
         converter.intValue = value;

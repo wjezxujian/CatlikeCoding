@@ -73,7 +73,7 @@ public class Lighting
 
         dirLightColors[index] = visibleLight.finalColor;
         Vector4 dirAndMask = -visibleLight.localToWorldMatrix.GetColumn(2);
-        dirAndMask.w = light.renderingLayerMask.ReinterpreAsFloat();
+        dirAndMask.w = light.renderingLayerMask.ReinterpretAsFloat();
         dirLightDirectionsAndMasks[index] = dirAndMask;
         dirLightShadowData[index] = shadows.ReserveDirectionalShadows(light, visibleIndex);
     }
@@ -87,7 +87,7 @@ public class Lighting
         otherLightSpotAngles[index] = new Vector4(0f, 1f);
 
         Vector4 dirAndMask = Vector4.zero;
-        dirAndMask.w = light.renderingLayerMask.ReinterpreAsFloat();
+        dirAndMask.w = light.renderingLayerMask.ReinterpretAsFloat();
         otherLightDirectionsAndMasks[index] = dirAndMask;
         otherLightShadowDatas[index] = shadows.ReserveOtherShadows(light, visibleIndex);
     }
@@ -100,7 +100,7 @@ public class Lighting
         otherLightPositions[index] = position;
 
         Vector4 dirAndMask = -visibleLight.localToWorldMatrix.GetColumn(2);
-        dirAndMask.w = light.renderingLayerMask.ReinterpreAsFloat();
+        dirAndMask.w = light.renderingLayerMask.ReinterpretAsFloat();
         otherLightDirectionsAndMasks[index] = dirAndMask;
         //Light light = visibleLight.light;
 
