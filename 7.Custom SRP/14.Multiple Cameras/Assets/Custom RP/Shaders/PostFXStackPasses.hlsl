@@ -1,5 +1,5 @@
 ﻿#ifndef CUSTOM_POST_FX_PASSES_INCLUDED
-#define CUSTOM_POST_FX_PASSED_INCLUDED
+#define CUSTOM_POST_FX_PASSES_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Filtering.hlsl"
@@ -297,9 +297,9 @@ float4 BloomScatterFinalPassFragment (Varyings input) : SV_TARGET {
         lowRes = GetSource(input.screenUV).rgb;
     }
     
-    float3 highRes = GetSource2(input.screenUV).rgb;
-    lowRes += highRes - ApplyBloomThreshold((highRes));
-    return float4(lerp(highRes, lowRes, _BloomIntensity), 1.0);
+    float4 highRes = GetSource2(input.screenUV);
+    lowRes += highRes.rgb - ApplyBloomThreshold(highRes.rgb);
+    return float4(lerp(highRes.rgb, lowRes, _BloomIntensity), highRes.a);
 }
 
 float4 ColorGradingNonePassFragment(Varyings input) : SV_TARGET
