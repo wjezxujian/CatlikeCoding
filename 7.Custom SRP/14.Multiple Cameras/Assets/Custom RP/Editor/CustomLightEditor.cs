@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using UnityEngine.Rendering;
 
 [CanEditMultipleObjects]
 [CustomEditorForRenderPipeline(typeof(Light), typeof(CustomRenderPipelineAsset))]
 public class CustomLightEditor : LightEditor
 {
-    static GUIContent renderingLayerMaskLabel = new GUIContent("Rendering Layer Mask", "Functional version of avove property.");
+    static GUIContent renderingLayerMaskLabel = new GUIContent("Rendering Layer Mask", "Functional version of above property.");
 
     public override void OnInspectorGUI()
     {

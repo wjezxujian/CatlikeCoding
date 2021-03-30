@@ -35,7 +35,7 @@ Shader "Custom RP/Lit" {
 		[Enum(Off, 0, On, 1)] _ZWrite("Z Write", Float) = 1
 
 		[HideInInspector] _MainTex("Texture for lightmap", 2D) = "white" {}
-		[HideInInspector] _Color("Texture for Lightmap", Color) = (0.5, 0.5, 0.5, 0.5)
+		[HideInInspector] _Color("Color for Lightmap", Color) = (0.5, 0.5, 0.5, 0.5)
 	}
 
 	SubShader {
