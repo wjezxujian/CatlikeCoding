@@ -16,7 +16,7 @@ public class Lighting
     static int
         dirLightCountId = Shader.PropertyToID("_DirectionalLightCount"),
         dirLightColorsId = Shader.PropertyToID("_DirectionalLightColors"),
-        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections"),
+        dirLightDirectionsAndMasksId = Shader.PropertyToID("_DirectionalLightDirectionsAndMasks"),
         dirLightShadowDataId = Shader.PropertyToID("_DirectionalLightShadowData");
 
     static Vector4[]
@@ -28,7 +28,7 @@ public class Lighting
         otherLightCountId = Shader.PropertyToID("_OtherLightCount"),
         otherLightColorsId = Shader.PropertyToID("_OtherLightColors"),
         otherLightPositionsId = Shader.PropertyToID("_OtherLightPositions"),
-        otherLightDirectionsId = Shader.PropertyToID("_OtherLightDirections"),
+        otherLightDirectionsAndMasksId = Shader.PropertyToID("_OtherLightDirectionsAndMasks"),
         otherLightSpotAnglesId = Shader.PropertyToID("_OtherLightSpotAngles"),
         otherLightShadowDataId = Shader.PropertyToID("_OtherLightShadowData");
 
@@ -38,7 +38,7 @@ public class Lighting
         otherLightPositions = new Vector4[maxOtherLightCount],
         otherLightDirectionsAndMasks = new Vector4[maxOtherLightCount],
         otherLightSpotAngles = new Vector4[maxOtherLightCount],
-        otherLightShadowDatas = new Vector4[maxOtherLightCount];
+        otherLightShadowData = new Vector4[maxOtherLightCount];
 
 
     CommandBuffer buffer = new CommandBuffer() { name = bufferName };
@@ -89,7 +89,7 @@ public class Lighting
         Vector4 dirAndMask = Vector4.zero;
         dirAndMask.w = light.renderingLayerMask.ReinterpretAsFloat();
         otherLightDirectionsAndMasks[index] = dirAndMask;
-        otherLightShadowDatas[index] = shadows.ReserveOtherShadows(light, visibleIndex);
+        otherLightShadowData[index] = shadows.ReserveOtherShadows(light, visibleIndex);
     }
 
     private void SetupSpotLight(int index, int visibleIndex, ref VisibleLight visibleLight, Light light)
@@ -108,7 +108,7 @@ public class Lighting
         float outerCos = Mathf.Cos(Mathf.Deg2Rad * 0.5f * visibleLight.spotAngle);
         float angleRangeInv = 1f / Mathf.Max(innerCos - outerCos, 0.001f);
         otherLightSpotAngles[index] = new Vector4(angleRangeInv, -outerCos * angleRangeInv);
-        otherLightShadowDatas[index] = shadows.ReserveOtherShadows(light, visibleIndex);
+        otherLightShadowData[index] = shadows.ReserveOtherShadows(light, visibleIndex);
     }
 
     private void SetupLights(bool useLightsPerObject, int renderingLayerMask)
@@ -117,7 +117,7 @@ public class Lighting
         NativeArray<VisibleLight> visibleLights = cullingResults.visibleLights;
 
         int dirLightCount = 0, otherLightCount = 0;
-        int i = 0;
+        int i;
         for (i = 0; i < visibleLights.Length; ++i)
         {
             int newIndex = -1;
@@ -174,11 +174,11 @@ public class Lighting
             Shader.DisableKeyword(lightsPerObjectKeyword);
         }
 
-        buffer.SetGlobalInt(dirLightCountId, visibleLights.Length);
+        buffer.SetGlobalInt(dirLightCountId, dirLightCount);
         if (dirLightCount > 0)
         {
             buffer.SetGlobalVectorArray(dirLightColorsId, dirLightColors);
-            buffer.SetGlobalVectorArray(dirLightDirectionsId, dirLightDirectionsAndMasks);
+            buffer.SetGlobalVectorArray(dirLightDirectionsAndMasksId, dirLightDirectionsAndMasks);
             buffer.SetGlobalVectorArray(dirLightShadowDataId, dirLightShadowData);
         }
 
@@ -187,9 +187,9 @@ public class Lighting
         {
             buffer.SetGlobalVectorArray(otherLightColorsId, otherLightColors);
             buffer.SetGlobalVectorArray(otherLightPositionsId, otherLightPositions);
-            buffer.SetGlobalVectorArray(otherLightDirectionsId, otherLightDirectionsAndMasks);
+            buffer.SetGlobalVectorArray(otherLightDirectionsAndMasksId, otherLightDirectionsAndMasks);
             buffer.SetGlobalVectorArray(otherLightSpotAnglesId, otherLightSpotAngles);
-            buffer.SetGlobalVectorArray(otherLightShadowDataId, otherLightShadowDatas);
+            buffer.SetGlobalVectorArray(otherLightShadowDataId, otherLightShadowData);
         }
     }    
 }
